@@ -1,0 +1,48 @@
+body {
+
+font-family: Georgia, serif;
+margin: 0;
+padding: 0;
+background: #f4f4f0;
+color: #222;
+
+}
+
+
+header {
+
+text-align: center;
+padding: 60px 20px;
+
+}
+
+
+h1 {
+
+font-size: 48px;
+
+}
+
+
+h2 {
+
+color: #2c5f2d;
+
+}
+
+
+section {
+
+max-width: 900px;
+margin: 40px auto;
+padding: 20px;
+
+}
+
+
+footer {
+
+text-align:center;
+padding:30px;
+
+}
