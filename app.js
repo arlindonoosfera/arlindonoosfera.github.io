@@ -20,7 +20,12 @@
     D.projetos.forEach(function (p) {
       if (atual !== "todos" && p.estagio !== atual) return;
       var a = el("article", "projeto");
-      a.appendChild(el("p", "etapa", D.estagios[p.estagio]));
+      var et = el("p", "etapa");
+      var lua = el("span", "lua", D.luas[p.estagio] + " ");
+      lua.setAttribute("aria-hidden", "true");
+      et.appendChild(lua);
+      et.appendChild(document.createTextNode(D.estagios[p.estagio]));
+      a.appendChild(et);
       var h = el("h3");
       if (p.link) {
         var l = el("a", "", p.titulo);

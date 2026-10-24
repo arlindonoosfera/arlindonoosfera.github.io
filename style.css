@@ -64,3 +64,17 @@ h3{margin:0 0 .35rem;font-size:1.15rem}
 .plano .lista{max-width:46rem}
 .plano h3{margin-top:1.5rem}
 .plano section{padding-top:2rem}
+
+.marca .lua,.etapa .lua{font-size:1em;letter-spacing:0}
+.luas{display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;font-family:var(--sans);font-size:.85rem;color:var(--suave);margin:1rem 0 .5rem}
+.epigrafe{font-style:italic;color:var(--suave);max-width:42rem;margin:.25rem 0 1rem}
+.abertura h1{font-style:italic}
+.prosa{max-width:46rem}
+.prosa h2,.prosa h3{margin-top:2rem}
+.prosa blockquote{border-left:3px solid var(--destaque);margin:1rem 0;padding:.1rem 1rem;color:var(--suave)}
+.tabela{overflow-x:auto}
+.tabela table{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:.95rem}
+.tabela th,.tabela td{border:1px solid var(--linha);padding:.5rem .7rem;text-align:left;vertical-align:top}
+.tabela th{background:var(--card)}
+.lista-aulas{list-style:none;padding:0}
+.lista-aulas li{padding:.5rem 0;border-bottom:1px solid var(--linha)}

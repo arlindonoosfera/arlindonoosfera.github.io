@@ -33,6 +33,7 @@ window.DADOS = {
     { titulo: "Incubadora Botânica Automatizada", estagio: "proposta", area: "Computação · Botânica",
       resumo: "Ideia de sistema automatizado para cultivo e observação vegetal. Sem protótipo até o momento." }
   ],
+  luas: { proposta: "🌑", planejamento: "🌒", desenvolvimento: "🌓", confirmar: "◌" },
   estagios: {
     proposta: "Proposta", planejamento: "Em planejamento",
     desenvolvimento: "Em desenvolvimento", confirmar: "Estágio a confirmar"
