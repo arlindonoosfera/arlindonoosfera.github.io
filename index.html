@@ -5,12 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arlindo Noosfera · arquivo de investigação e criação</title>
 <meta name="description" content="Estudante de Licenciatura em Ciências Biológicas. Projetos, ensaios, leituras e aulas em Biologia, educação, tecnologia e arte.">
+<link rel="canonical" href="https://arlindonoosfera.github.io/">
+<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Arlindo Noosfera · arquivo de investigação e criação">
+<meta property="og:description" content="Projetos, ensaios, leituras e aulas em Biologia, educação, tecnologia e arte.">
+<meta property="og:url" content="https://arlindonoosfera.github.io/">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
-  <a class="marca" href="#"><span aria-hidden="true">🌒</span> Arlindo Noosfera</a>
+  <a class="marca" href="index.html"><span aria-hidden="true">🌒</span> Arlindo Noosfera</a>
   <nav aria-label="Principal">
     <a href="#projetos">Projetos</a>
     <a href="#aulas">Aulas</a>
@@ -26,7 +31,7 @@
     <p class="rotulo">Noosfera: a esfera do pensamento</p>
     <h1>Um arquivo vivo de perguntas, projetos e leituras.</h1>
     <p class="lead">Sou estudante de Licenciatura em Ciências Biológicas. Este site reúne o que investigo, construo e escrevo entre Biologia, educação, tecnologia e arte, indicando em que etapa cada trabalho realmente está.</p>
-    <p class="luas" aria-label="Legenda dos estágios, como fases da Lua"><span>🌑 proposta</span><span>🌒 planejamento</span><span>🌓 desenvolvimento</span><span>🌕 concluído</span></p>
+    <p class="luas" id="legenda" aria-label="Legenda dos estágios, como fases da Lua"></p>
     <p class="epigrafe"><em>Hic sunt dracones</em>: onde o mapa acaba, a investigação começa.</p>
     <p class="fluxo" aria-label="Percurso">Formação → conhecimentos → projetos → aplicação → evidências → análise → divulgação</p>
   </section>
@@ -34,7 +39,14 @@
   <section id="projetos" aria-labelledby="h-proj">
     <h2 id="h-proj">Projetos</h2>
     <p class="intro">Ideia, planejamento e realização são coisas diferentes. Cada projeto traz o seu estágio.</p>
+    <p id="erro-dados" class="erro" role="alert" hidden></p>
+    <div class="controles">
+      <div class="campo"><label for="busca">Buscar nos projetos</label><input id="busca" type="search" autocomplete="off"></div>
+      <div class="campo"><label for="categoria">Área</label><select id="categoria"><option value="">Todas</option></select></div>
+      <button id="limpar" type="button" class="limpar" hidden>Limpar filtros</button>
+    </div>
     <div id="filtros" class="filtros" role="group" aria-label="Filtrar por estágio"></div>
+    <p id="status" class="status" role="status"></p>
     <div id="lista-projetos" class="projetos"></div>
   </section>
 
@@ -89,6 +101,7 @@
 
 <noscript><p class="aviso">Ative o JavaScript para ver a lista de projetos e o mapa de interesses.</p></noscript>
 <script src="data.js"></script>
+<script src="lib.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

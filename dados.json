@@ -1,0 +1,229 @@
+{
+  "estados": [
+    {
+      "id": "proposta",
+      "rotulo": "Proposta",
+      "lua": "🌑"
+    },
+    {
+      "id": "planejamento",
+      "rotulo": "Em planejamento",
+      "lua": "🌒"
+    },
+    {
+      "id": "desenvolvimento",
+      "rotulo": "Em desenvolvimento",
+      "lua": "🌓"
+    },
+    {
+      "id": "aplicado",
+      "rotulo": "Aplicado",
+      "lua": "🌔"
+    },
+    {
+      "id": "concluido",
+      "rotulo": "Concluído",
+      "lua": "🌕"
+    },
+    {
+      "id": "confirmar",
+      "rotulo": "Estágio a confirmar",
+      "lua": "◌"
+    }
+  ],
+  "projetos": [
+    {
+      "titulo": "Aetherion",
+      "estagio": "planejamento",
+      "area": "Ciências naturais · Caatinga",
+      "resumo": "Pesquisa sobre a temperatura da superfície do solo durante calor extremo e seu efeito na germinação e viabilidade de sementes da Caatinga.",
+      "metodo": "Temperaturas observadas definem tratamentos experimentais, comparados a um controle; depois, análise da germinação. Base de hardware planejada: réplica do projeto de Tinkercad \"DIY Weather Station With ESP32\".",
+      "nota": "Ainda sem medições nem resultados publicados. Resultados significativos exigem dados ambientais do solo e dados biológicos de germinação."
+    },
+    {
+      "titulo": "Simulador Hematológico",
+      "estagio": "confirmar",
+      "area": "Educação · Computação",
+      "resumo": "Simulador interativo para o ensino de morfologia e patologias sanguíneas.",
+      "link": "https://github.com/Alrodbs/simulador-hematologico",
+      "nota": "Objetivo pedagógico. Sem validação clínica."
+    },
+    {
+      "titulo": "Biologia em Mundos Imaginários",
+      "estagio": "planejamento",
+      "area": "Educação",
+      "resumo": "RPG educacional sobre biomas, adaptação e evolução.",
+      "nota": "Aplicação com estudantes, avaliação e relato de experiência são etapas futuras."
+    },
+    {
+      "titulo": "Sobrevivência em Área Florestal e em Alto Mar",
+      "estagio": "desenvolvimento",
+      "area": "Educação · Interdisciplinar",
+      "resumo": "Livro/material didático interdisciplinar de criação coletiva: ambientes, orientação, meteorologia, botânica, primeiros socorros, energia e comunicação."
+    },
+    {
+      "titulo": "Severina: Vozes do Sertão",
+      "estagio": "confirmar",
+      "area": "Arte · Audiovisual",
+      "resumo": "Produção audiovisual sobre poesia nordestina, Caatinga, seca e identidade cultural, com estética do Cinema Novo.",
+      "nota": "Participação: direção e edição."
+    },
+    {
+      "titulo": "Recursos Hídricos, Saúde e Meio Ambiente",
+      "estagio": "confirmar",
+      "area": "Atividade técnico-científica",
+      "resumo": "Atividade técnico-científica em que atuei como monitor, apoiando as atividades e a organização da exposição final."
+    },
+    {
+      "titulo": "Astro: observação e astrofotografia",
+      "estagio": "confirmar",
+      "area": "Astronomia",
+      "resumo": "Observação astronômica e astrofotografia. Espaço reservado para registros reais: data, condições, equipamento, processamento e objetos."
+    },
+    {
+      "titulo": "Festa do Chá Newtoniana",
+      "estagio": "proposta",
+      "area": "Divulgação científica",
+      "resumo": "Proposta de divulgação interdisciplinar ligando Física, Química, Biologia, cinema, cotidiano e História das Ciências."
+    },
+    {
+      "titulo": "NEXUS",
+      "estagio": "proposta",
+      "area": "Educação",
+      "resumo": "Núcleo de Experiências e Desenvolvimento do Estudante: proposta de acompanhamento e avaliação integral, com cuidado com dados pessoais.",
+      "nota": "Não é um sistema implementado."
+    },
+    {
+      "titulo": "Astronomia multissensorial e inclusiva",
+      "estagio": "proposta",
+      "area": "Educação · Astronomia",
+      "resumo": "Experiências de Astronomia acessíveis por diferentes modalidades sensoriais."
+    },
+    {
+      "titulo": "Incubadora Botânica Automatizada",
+      "estagio": "proposta",
+      "area": "Computação · Botânica",
+      "resumo": "Ideia de sistema automatizado para cultivo e observação vegetal. Sem protótipo até o momento."
+    }
+  ],
+  "trajetoria": [
+    {
+      "titulo": "Concluído",
+      "itens": [
+        "Ensino Médio (2025)",
+        "Técnico em Logística (2025)"
+      ]
+    },
+    {
+      "titulo": "Em andamento",
+      "itens": [
+        "Licenciatura em Ciências Biológicas",
+        "Técnico em Informática"
+      ]
+    },
+    {
+      "titulo": "Cursos e atividades complementares",
+      "itens": []
+    },
+    {
+      "titulo": "Possibilidades futuras (não são compromissos)",
+      "itens": [
+        "Astronomia e Astronáutica",
+        "Especialização em Ensino de Astronomia",
+        "Mestrado em área compatível (Biologia, Astrobiologia, Astronomia, Educação)",
+        "Artes Visuais, Filosofia, Pedagogia"
+      ]
+    }
+  ],
+  "interesses": [
+    {
+      "grupo": "Natureza e universo",
+      "itens": [
+        "Botânica",
+        "Ecologia",
+        "Evolução",
+        "Origem da Vida",
+        "Astrobiologia",
+        "Astronomia",
+        "Cosmologia",
+        "Climatologia",
+        "Geociências",
+        "Caatinga e Sertão"
+      ]
+    },
+    {
+      "grupo": "Educação e computação",
+      "itens": [
+        "Ensino de Ciências",
+        "Ensino de Astronomia",
+        "Python e Jupyter",
+        "ESP32 e Arduino",
+        "Linux, Git e GitHub",
+        "Análise de dados",
+        "Simulações"
+      ]
+    },
+    {
+      "grupo": "Pensamento e linguagem",
+      "itens": [
+        "Filosofia da Ciência",
+        "Existencialismo",
+        "Fenomenologia",
+        "Linguística e Etimologia",
+        "Antropologia da Religião",
+        "Historiografia e Folclore"
+      ]
+    },
+    {
+      "grupo": "Escrita e arte",
+      "itens": [
+        "Ficção científica",
+        "Poesia simbolista",
+        "Ensaios e epistolografia",
+        "Fotografia e astrofotografia",
+        "Cinema de autor",
+        "Música"
+      ]
+    },
+    {
+      "grupo": "Jogos e estratégia",
+      "itens": [
+        "Jogos narrativos e filosóficos",
+        "Construção de mundos",
+        "Xadrez"
+      ]
+    }
+  ],
+  "conexoes": [
+    {
+      "nome": "GitHub",
+      "url": "https://github.com/arlindonoosfera",
+      "nota": "Código e documentação técnica"
+    },
+    {
+      "nome": "Repositório deste site",
+      "url": "https://github.com/arlindonoosfera/arlindonoosfera.github.io",
+      "nota": "Código-fonte do portfólio"
+    },
+    {
+      "nome": "Blogger",
+      "url": "",
+      "nota": "Ensaios: falta o endereço público do blog"
+    },
+    {
+      "nome": "Lattes",
+      "url": "",
+      "nota": "Link a informar"
+    },
+    {
+      "nome": "LinkedIn",
+      "url": "",
+      "nota": "Link a informar"
+    },
+    {
+      "nome": "Sala de aula",
+      "url": "",
+      "nota": "Link a informar"
+    }
+  ]
+}
