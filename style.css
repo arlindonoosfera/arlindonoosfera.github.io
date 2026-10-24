@@ -1,48 +1,62 @@
-body {
-
-font-family: Georgia, serif;
-margin: 0;
-padding: 0;
-background: #f4f4f0;
-color: #222;
-
+:root{
+  --fundo:#f4efe6; --texto:#1f2421; --suave:#5b625c; --linha:#d6cdbd;
+  --destaque:#2f5d50; --card:#faf7f0;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
-
-
-header {
-
-text-align: center;
-padding: 60px 20px;
-
+@media (prefers-color-scheme:dark){
+  :root{--fundo:#15191a; --texto:#e8e4da; --suave:#a3aaa3; --linha:#2f3735; --destaque:#8fc3b0; --card:#1b2122}
 }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fundo);color:var(--texto);font:1.0625rem/1.65 var(--serif)}
+a{color:var(--destaque)}
+:focus-visible{outline:3px solid var(--destaque);outline-offset:3px}
+.pular{position:absolute;left:-999px;background:var(--texto);color:var(--fundo);padding:.5rem 1rem}
+.pular:focus{left:1rem;top:1rem;z-index:10}
 
+.topo{display:flex;flex-wrap:wrap;gap:.75rem 2rem;justify-content:space-between;align-items:baseline;
+  max-width:62rem;margin:0 auto;padding:1.25rem 1.25rem 0;font-family:var(--sans);font-size:.95rem}
+.marca{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--texto);text-decoration:none}
+.topo nav{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem}
+.topo nav a{color:var(--suave);text-decoration:none}
+.topo nav a:hover{color:var(--destaque);text-decoration:underline}
 
-h1 {
+main,.rodape{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+section{padding:3rem 0 1rem;border-top:1px solid var(--linha);margin-top:2rem}
+.abertura{border-top:0;padding-top:4rem}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.15;margin:.5rem 0 1.25rem;max-width:20ch;font-weight:400}
+h2{font-size:1.6rem;margin:0 0 .5rem;font-weight:700}
+h3{margin:0 0 .35rem;font-size:1.15rem}
+.rotulo{font-family:var(--sans);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--destaque);margin:0}
+.lead{font-size:1.2rem;max-width:42rem}
+.fluxo{font-family:var(--sans);font-size:.9rem;color:var(--suave);border-left:3px solid var(--destaque);padding-left:.9rem;max-width:42rem}
+.intro{color:var(--suave);max-width:42rem;margin-top:0}
 
-font-size: 48px;
+.filtros{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.25rem 0}
+.filtros button{font:inherit;font-family:var(--sans);font-size:.9rem;padding:.4rem .9rem;border:1px solid var(--linha);
+  background:transparent;color:var(--texto);border-radius:999px;cursor:pointer}
+.filtros button[aria-pressed="true"]{background:var(--destaque);color:var(--fundo);border-color:var(--destaque)}
 
-}
+.projetos{display:grid;grid-template-columns:repeat(auto-fill,minmax(18rem,1fr));gap:1.25rem}
+.projeto{background:var(--card);border:1px solid var(--linha);border-top:3px solid var(--destaque);padding:1.1rem 1.25rem}
+.projeto p{margin:.4rem 0}
+.etapa,.area{font-family:var(--sans);font-size:.78rem;color:var(--suave)}
+.etapa{font-weight:700;color:var(--destaque);text-transform:uppercase;letter-spacing:.08em}
+.nota{font-size:.95rem;color:var(--suave);border-top:1px dashed var(--linha);padding-top:.5rem}
 
+.duas{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.25rem;margin-top:1rem}
+.vazio{border:1px dashed var(--linha);padding:1rem 1.25rem}
 
-h2 {
+.mapa{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.5rem}
+.mapa ul,.traj ul{margin:.25rem 0;padding-left:1.1rem}
+.traj{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.5rem}
+.traj .vazio-t{color:var(--suave);font-style:italic}
 
-color: #2c5f2d;
-
-}
-
-
-section {
-
-max-width: 900px;
-margin: 40px auto;
-padding: 20px;
-
-}
-
-
-footer {
-
-text-align:center;
-padding:30px;
-
-}
+.conexoes{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.conexoes li{border-bottom:1px solid var(--linha);padding-bottom:.6rem}
+.conexoes .nota{border:0;padding:0;margin:0;font-family:var(--sans)}
+.pendente{color:var(--suave);font-weight:700}
+.rodape{padding-top:2rem;padding-bottom:3rem;color:var(--suave);font-family:var(--sans);font-size:.9rem}
+.aviso{max-width:62rem;margin:1rem auto;padding:0 1.25rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
