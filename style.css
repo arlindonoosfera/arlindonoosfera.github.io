@@ -60,3 +60,7 @@ h3{margin:0 0 .35rem;font-size:1.15rem}
 .rodape{padding-top:2rem;padding-bottom:3rem;color:var(--suave);font-family:var(--sans);font-size:.9rem}
 .aviso{max-width:62rem;margin:1rem auto;padding:0 1.25rem}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.plano .lista{max-width:46rem}
+.plano h3{margin-top:1.5rem}
+.plano section{padding-top:2rem}
