@@ -1,0 +1,1 @@
+Modelos para copiar para conteudo/<tipo>/ (esta pasta é ignorada pelo build). Para ativar a Frase do dia, crie conteudo/frases.json no formato de frases.exemplo.json, apenas com frases cuja autoria e fonte você verificou.

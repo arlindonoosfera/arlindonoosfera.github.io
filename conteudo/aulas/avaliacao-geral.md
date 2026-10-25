@@ -1,26 +1,32 @@
 ---
-titulo: Avaliação geral
+titulo: AVALIAÇÃO GERAL
+estado: planejamento
 ano: Todos os anos
-estagio: planejamento
+recurso: avaliacao
+disciplina: Biologia
+nivel: Ensino Médio
 ---
-# Avaliação geral
 
-Ideia em desenvolvimento: um sistema de atribuições e níveis de proficiência, e não apenas notas. Sempre haverá teste, para verificar se o conhecimento foi absorvido.
+Criar sisteminha de atribuições e notas (não apenas notas)
 
-## Rubrica das fases da Lua
+- criar um sistema real e colocar no lattes
 
-- 🌑 **Lua Nova**: a Lua não é visível da Terra.
-- 🌒 **Lua Crescente (fina)**: começa a aparecer um fino arco iluminado.
-- 🌓 **Quarto Crescente**: metade da Lua está iluminada.
-- 🌔 **Lua Gibosa Crescente**: mais da metade iluminada.
-- 🌕 **Lua Cheia**: totalmente iluminada.
-- 🌖 **Lua Gibosa Minguante**: começa a diminuir a parte iluminada.
-- 🌗 **Quarto Minguante**: metade iluminada novamente.
-- 🌘 **Lua Minguante (fina)**: resta apenas um fino arco antes de voltar à Lua Nova.
+Sempre haverá teste (verificar se o conhecimento foi absorvido)
 
-**Bônus:** se a atividade for feita no dia da fase da Lua correspondente à data da observação, vale 0,25 ponto.
+Rubrica ():
 
-## Exemplo de níveis: proficiência em Genética
+- 🌑 **Lua Nova** – a Lua não é visível da Terra.
+- 🌒 **Lua Crescente (fina)** – começa a aparecer um fino arco iluminado.
+- 🌓 **Quarto Crescente** – metade da Lua está iluminada.
+- 🌔 **Lua Gibosa Crescente** – mais da metade iluminada.
+- 🌕 **Lua Cheia** – totalmente iluminada.
+- 🌖 **Lua Gibosa Minguante** – começa a diminuir a parte iluminada.
+- 🌗 **Quarto Minguante** – metade iluminada novamente.
+- 🌘 **Lua Minguante (fina)** – resta apenas um fino arco antes de voltar à Lua Nova.
+
+**Bônus:** Se a atividade for no dia da fase da Lua correspondente à data da observação, será concedido um bônus de **0,25 ponto**.
+
+Exemplo: 
 
 | Nível | Proficiência em Genética |
 | --- | --- |
@@ -29,20 +35,26 @@ Ideia em desenvolvimento: um sistema de atribuições e níveis de proficiência
 | Nível 3 | Aplica conceitos em problemas novos |
 | Nível 4 | Analisa situações complexas e justifica suas conclusões |
 
-## Avaliação diagnóstica
+AVALIAÇÃO DIAGNOSTICA 
 
-Teste de interpretação de informações científicas e aplicação de conceitos básicos, com uma primeira pergunta sempre aberta: o que é aquele ramo de trabalho? Corrigido com observações e devolvido aos estudantes, com um QR code para flashcards. O objetivo é descobrir rapidamente quem entendeu o básico e quem ainda tem lacunas, sem exigir respostas longas.
+Passar meio que um teste que é mais interpretação de informações científicas e aplicação de conceitos básicos sobre o assunto (a 1 pergunta sempre aberta perguntando o que é aquele ramo trabalho), corrigir colocando obs. e entregar de volta aos alunos. e vai ter um QR code que leva pra flashcards.
 
-Aula de 50 minutos:
+**uma avaliação diagnóstica**, não uma prova para aprofundar ou exigir respostas longas. A ideia é descobrir rapidamente **quem entendeu os conceitos básicos e quem ainda apresenta lacunas**.
 
-- 5 min: orientações e explicação da atividade.
-- 30 a 35 min: resolução das questões.
-- 5 a 10 min: revisão das respostas e entrega.
+50min:
 
-## Prova oficial (avaliação somativa)
+- **5 min:** orientações e explicação da atividade.
+- **30–35 min:** resolução das questões.
+- **5–10 min:** revisão das respostas e entrega.
 
-Questões de compreensão, interpretação e aplicação dos conceitos, com situações-problema, textos, gráficos, imagens e questões objetivas e abertas. Verifica a aprendizagem e a capacidade de relacionar e aplicar conhecimentos em contextos diferentes.
+Outros 50min: alguma serie.
 
-## Pesquisa de satisfação
+PROVA OFICIAL (Avaliação somativa)
 
-Cinco perguntas de satisfação, separadas da prova, respondidas marcando um X.
+Avaliação oficial com questões de compreensão, interpretação e aplicação dos conceitos científicos trabalhados, utilizando situações-problema, textos, gráficos, imagens e questões objetivas e abertas. Busca verificar a aprendizagem dos conteúdos e a capacidade dos estudantes de relacionar e aplicar os conhecimentos em diferentes contextos.
+
+Vou passar atividade pra ajudar, porém se não se aplica aos cálculos (divisão etc e tal) se o aluno tirar >9, ou seja se tirou essa nota vai ficar com ela (caso claro ele não tenha feito nenhuma atividade).
+
+---
+
+5 perguntas de satisfação (separado da prova so marcar um X)

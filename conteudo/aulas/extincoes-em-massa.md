@@ -1,22 +1,40 @@
 ---
 titulo: Extinções em massa
-ano: 1º ano · Unidade 2
-estagio: planejamento
+estado: planejamento
+ano: 1º ano
+unidade: Unidade 2 · História da Vida na Terra
+recurso: aula
+disciplina: Biologia
+nivel: Ensino Médio
+tags: evolucao
 ---
-# Extinções em massa
 
-Aula da Unidade 2 (História da Vida na Terra).
+→ o que caracteriza uma extinção em massa
 
-## Roteiro
+→ principais eventos da história da Terra
 
-- O que caracteriza uma extinção em massa.
-- Principais eventos da história da Terra: Permiano–Triássico, Triássico–Jurássico, Cretáceo–Paleógeno e outros.
-- Possíveis causas e evidências.
+→ Permiano–Triássico
 
-## Estudo de caso aprofundado
+→ Triássico–Jurássico
 
-Extinção Cretáceo–Paleógeno e a cratera de Chicxulub ([Wikipédia](https://pt.wikipedia.org/wiki/Cratera_de_Chicxulub)).
+→ Cretáceo–Paleógeno
 
-## Impactos futuros e defesa planetária
+→ outros eventos
 
-Um impacto do porte de Chicxulub pode acontecer de novo. Discussão sobre defesa planetária e a missão DART ([vídeo](https://www.youtube.com/watch?v=eYUToxsh6lo)). Recurso: [Eyes on Asteroids, da NASA](https://eyes.nasa.gov/apps/asteroids/#/home). Se houver tempo, o filme *Não Olhe para Cima* ou outro thriller recomendado.
+→ possíveis causas e evidências
+
+→ estudo de caso aprofundado:
+
+Extinção Cretáceo–Paleógeno (**Chicxulub)**
+
+[https://pt.wikipedia.org/wiki/Cratera_de_Chicxulub](https://pt.wikipedia.org/wiki/Cratera_de_Chicxulub)
+
+→ possibilidade de impactos futuros / DART
+
+Um impacto do porte de Chicxulub pode acontecer novamente - defesa planetária
+
+Filme “Não Olhe para Cima” - se der tempo passar ou outro caso recomendar triller
+
+[https://eyes.nasa.gov/apps/asteroids/#/home](https://eyes.nasa.gov/apps/asteroids/#/home)
+
+Missão DART [https://www.youtube.com/watch?v=eYUToxsh6lo](https://www.youtube.com/watch?v=eYUToxsh6lo)
