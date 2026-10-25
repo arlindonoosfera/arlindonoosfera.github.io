@@ -1,1 +1,4 @@
 Modelos para copiar para conteudo/<tipo>/ (esta pasta é ignorada pelo build). Para ativar a Frase do dia, crie conteudo/frases.json no formato de frases.exemplo.json, apenas com frases cuja autoria e fonte você verificou.
+
+Resenhas: tipo = livro, filme, serie, documentario, musica, jogo ou arte. Os campos data e tema são opcionais (sem tema, é derivado do tipo). Comentários não são permitidos no cabeçalho.
+Pauta: copie pauta.exemplo.json para conteudo/pauta.json.

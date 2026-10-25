@@ -1,9 +1,9 @@
 ---
 titulo: Título da obra
 tipo: filme
+tema: cinema
 autoria: Nome do(a) realizador(a) ou autor(a)
 ano: 2000
-data: 2026-01-31
 resumo: Frase de apresentação da resenha.
 spoilers: sim
 nota: 4

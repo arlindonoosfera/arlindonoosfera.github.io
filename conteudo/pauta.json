@@ -1,0 +1,30 @@
+{
+  "textos": [
+    {"titulo": "Notion, Claude e Obsidian (segundo cérebro)", "formato": []},
+    {"titulo": "Matrix", "formato": ["resenha", "reflexao"]},
+    {"titulo": "Blade Runner: a cena das células", "formato": ["resenha", "reflexao"], "nota": "Sobre o filme, a partir da cena das células."},
+    {"titulo": "Uma passagem pela vida de Erik Satie", "formato": ["biografia"], "nota": "Biografia em formato mais interativo."},
+    {"titulo": "O que é antropofagia? Entendendo o fenômeno pela biologia", "formato": []},
+    {"titulo": "Zima Blue", "formato": ["resenha", "reflexao"]},
+    {"titulo": "Por que hoje temos a impressão de não ter mais “gênios”?", "formato": []},
+    {"titulo": "Por que os antigos faziam figuras geométricas?", "formato": []},
+    {"titulo": "Educação financeira", "formato": [], "nota": "Ideia inicial: pagar melhor quem presta serviço; agradecer mais é fundamental."},
+    {"titulo": "Monty Python em Busca do Cálice Sagrado", "formato": [], "nota": "Sobre a cena do discurso político."},
+    {"titulo": "Isaac Newton, Nikola Tesla e Schrödinger: a tríade dos maiores cientistas de todos os tempos", "formato": []},
+    {"titulo": "Lerduita", "formato": ["outro"], "nota": "Conto em desenvolvimento, ainda sem texto publicado."}
+  ],
+  "cadernos": [
+    {"titulo": "Caderno de ideias: roteiros de cinema", "nota": "Apenas ideias, sem desenvolvimento.", "ideias": [
+      "Algo relacionado à hipnótica.",
+      "Conceitos de Midsommar e O Homem de Palha, mas na Pedra do Reino (o reino da pedra).",
+      "No estilo de The Ballad of Buster Scruggs, mas com uma história de vikings.",
+      "Um homem ganha na loteria e decide transformar em um inferno a vida de todos que o humilharam e o trataram mal.",
+      "Curta: Realidade, sobre o aumento da IA, que cria imagens, vídeos e áudios semelhantes aos nossos.",
+      "Engenharia reversa de uma nave alienígena.",
+      "Curta: A morte do Homem de Neandertal.",
+      "Usar o conceito de que o cérebro passa cerca de 7 minutos “relembrando” a vida.",
+      "Título com referência à mitologia da caatinga, no estilo de Werner Herzog com a pegada de Glauber Rocha.",
+      "Um episódio de Star Trek (série clássica)."
+    ]}
+  ]
+}

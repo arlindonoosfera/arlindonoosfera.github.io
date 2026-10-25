@@ -1,0 +1,9 @@
+{
+  "textos": [
+    {"titulo": "Título do tema", "formato": ["resenha", "reflexao"], "nota": "Observação opcional."},
+    {"titulo": "Outro tema, ainda sem formato definido", "formato": []}
+  ],
+  "cadernos": [
+    {"titulo": "Caderno de ideias", "nota": "Opcional.", "ideias": ["Primeira ideia.", "Segunda ideia."]}
+  ]
+}
