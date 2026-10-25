@@ -23,25 +23,40 @@ TIPOS = {"aula": ("aulas", "aulas"), "projeto": ("projetos", "projetos"), "escri
 ENUM = {
     "recurso": ["aula", "atividade", "guia", "avaliacao", "material", "roteiro", "plano"],
     "categoria": ["ensaio", "noticia", "relato", "reflexao", "texto"],
-    "tipo": ["livro", "filme", "serie"],
+    "tipo": ["livro", "filme", "serie", "documentario", "musica", "jogo", "arte"],
+    "tema": ["cinema", "serie", "livro", "musica", "jogo", "arte", "reflexao", "ensaio", "noticia", "relato", "texto", "ciencia"],
     "leitura": ["por-ler", "a-ler", "lendo", "concluido", "abandonado"],
 }
 ROTULOS = {
     "recurso": {"aula": "Aula", "atividade": "Atividade", "guia": "Guia de estudo", "avaliacao": "Avaliação", "material": "Material", "roteiro": "Roteiro", "plano": "Plano de ensino"},
     "categoria": {"ensaio": "Ensaio", "noticia": "Notícia comentada", "relato": "Relato de experiência", "reflexao": "Reflexão filosófica", "texto": "Texto autoral"},
-    "tipo": {"livro": "Livro", "filme": "Filme", "serie": "Série"},
+    "tipo": {"livro": "Livro", "filme": "Filme", "serie": "Série", "documentario": "Documentário", "musica": "Música", "jogo": "Jogo", "arte": "Arte"},
     "leitura": {"por-ler": "Por ler", "a-ler": "A ler", "lendo": "Em leitura", "concluido": "Concluído", "abandonado": "Abandonado"},
 }
 CAMPOS = {  # obrigatórios, opcionais
     "aula": (["titulo"], ["estado", "ano", "unidade", "recurso", "disciplina", "nivel", "duracao", "tags", "data", "atualizado", "resumo", "arquivo", "relacionados", "ordem"]),
     "projeto": (["titulo", "estado", "area", "resumo"], ["tags", "inicio", "atualizado", "destaque", "link", "relacionados"]),
-    "escrito": (["titulo", "categoria", "data", "resumo"], ["subtitulo", "tags", "atualizado", "imagem", "fonte_titulo", "fonte_url", "fonte_data", "relacionados"]),
-    "resenha": (["titulo", "tipo", "autoria", "ano", "data", "resumo"], ["spoilers", "nota", "capa", "tags", "relacionados", "atualizado"]),
+    "escrito": (["titulo", "categoria", "resumo"], ["data", "tema", "subtitulo", "tags", "atualizado", "imagem", "fonte_titulo", "fonte_url", "fonte_data", "relacionados"]),
+    "resenha": (["titulo", "tipo", "autoria", "ano", "resumo"], ["data", "tema", "subtitulo", "spoilers", "nota", "capa", "tags", "relacionados", "atualizado"]),
     "livro": (["titulo", "autor", "leitura"], ["edicao", "editora", "ano", "isbn", "inicio", "fim", "tags", "resenha", "relacionados", "resumo", "atualizado", "capa"]),
 }
 ORDEM_ANO = ["Visão geral", "Todos os anos", "1º ano", "2º ano", "3º ano", "Extensão", "A organizar"]
 DATAS = ("data", "atualizado", "inicio", "fim", "fonte_data")
 LISTAS = ("tags", "relacionados")
+FORMATOS = {"resenha": "Resenha", "reflexao": "Reflexão", "ensaio": "Ensaio", "biografia": "Biografia interativa", "guia": "Guia", "relato": "Relato", "outro": "Outro formato"}
+
+
+def tema_de(i):
+    """Tema visual do item: o campo 'tema', ou o derivado do tipo/categoria."""
+    m, t = i["meta"], i["tipo"]
+    if m.get("tema"): return m["tema"]
+    if t == "resenha": return {"filme": "cinema", "documentario": "cinema", "serie": "serie", "livro": "livro", "musica": "musica", "jogo": "jogo", "arte": "arte"}[m["tipo"]]
+    if t == "escrito": return m["categoria"]
+    return "livro" if t == "livro" else "ciencia"
+
+
+def data_txt(m):
+    return f'<time datetime="{m["data"]}">{fmt_data(m["data"])}</time>' if m.get("data") else "data original a confirmar"
 
 
 class Erros(list):
@@ -300,6 +315,49 @@ def carregar_frases(e):
     return v
 
 
+def carregar_pauta(e):
+    f = RAIZ / "conteudo" / "pauta.json"
+    vazio = {"textos": [], "cadernos": []}
+    if not f.exists(): return vazio
+    try: v = json.loads(f.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as x: e.add("conteudo/pauta.json", f"linha {x.lineno}", x.msg); return vazio
+    if not isinstance(v, dict): e.add("conteudo/pauta.json", "(raiz)", "deve ser um objeto com 'textos' e/ou 'cadernos'"); return vazio
+    for i, t in enumerate(v.get("textos", [])):
+        onde = f"conteudo/pauta.json textos[{i}]"
+        if not (isinstance(t, dict) and isinstance(t.get("titulo"), str) and t["titulo"].strip()): e.add(onde, "titulo", "texto obrigatório"); continue
+        for c in ("nota",):
+            if c in t and not (isinstance(t[c], str) and t[c].strip()): e.add(onde, c, "deve ser texto não vazio")
+        fm = t.get("formato", [])
+        if not (isinstance(fm, list) and all(x in FORMATOS for x in fm)): e.add(onde, "formato", f"lista com valores de {sorted(FORMATOS)}")
+    for i, c in enumerate(v.get("cadernos", [])):
+        onde = f"conteudo/pauta.json cadernos[{i}]"
+        if not (isinstance(c, dict) and isinstance(c.get("titulo"), str) and c["titulo"].strip()): e.add(onde, "titulo", "texto obrigatório"); continue
+        if not (isinstance(c.get("ideias"), list) and c["ideias"] and all(isinstance(x, str) and x.strip() for x in c["ideias"])): e.add(onde, "ideias", "lista não vazia de textos")
+    return {"textos": v.get("textos", []), "cadernos": v.get("cadernos", [])}
+
+
+def pauta_id(t): return "p-" + slug_de(re.sub(r"[^\w\s-]", "", t.lower().encode("ascii", "ignore").decode())) [:50].rstrip("-")
+
+
+def pagina_pauta(pauta):
+    ids = {}
+    def uid(t):
+        b = pauta_id(t); ids[b] = ids.get(b, 0) + 1; return b if ids[b] == 1 else f"{b}-{ids[b]}"
+    corpo = ('<div class="pagina"><header class="topo-pagina"><p class="rotulo">Escritos · Em pauta</p><h1>Em pauta</h1>'
+             '<p class="lead">Temas que quero desenvolver. Ainda não são textos: são intenções, e o site as trata assim. Quando um deles for escrito, passa para Escritos ou Resenhas.</p></header>')
+    if pauta["textos"]:
+        corpo += '<section><h2>Textos e resenhas planejados</h2><ul class="pauta">'
+        for t in pauta["textos"]:
+            fm = "".join(f'<span class="selo">{FORMATOS[x]}</span> ' for x in t.get("formato", []))
+            nota = f'<p class="meta">{esc(t["nota"])}</p>' if t.get("nota") else ""
+            corpo += f'<li id="{uid(t["titulo"])}"><strong>{esc(t["titulo"])}</strong> {fm}{nota}</li>'
+        corpo += "</ul></section>"
+    for c in pauta["cadernos"]:
+        nota = f'<p class="meta">{esc(c["nota"])}</p>' if c.get("nota") else ""
+        corpo += f'<section><h2>{esc(c["titulo"])}</h2>{nota}<ul>' + "".join(f"<li>{esc(x)}</li>" for x in c["ideias"]) + "</ul></section>"
+    return corpo + "</div>"
+
+
 # ===================== HTML: peças =====================
 NAV = [("index.html", "Início", "inicio"), ("projetos.html", "Projetos", "projetos"), ("aulas.html", "Aulas e educação", "aulas"),
        ("escritos.html", "Escritos", "escritos"), ("resenhas.html", "Resenhas", "resenhas"), ("biblioteca.html", "Biblioteca", "biblioteca"),
@@ -357,12 +415,12 @@ def cartao(i, estados, base="", nivel=3):
     elif t == "projeto":
         meta, extra, selo = esc(m["area"]), "", selo_estado(m["estado"], estados)
     elif t == "escrito":
-        meta, extra, selo = f'{ROTULOS["categoria"][m["categoria"]]} · {fmt_data(m["data"])}', "", ""
+        meta, extra, selo = ROTULOS["categoria"][m["categoria"]] + (f' · {fmt_data(m["data"])}' if m.get("data") else ""), "", ""
     elif t == "resenha":
         meta, extra, selo = f'{ROTULOS["tipo"][m["tipo"]]} · {esc(m["autoria"])} · {esc(m["ano"])}', "", ""
     else:
         meta, extra, selo = f'{esc(m["autor"])}', "", f'<span class="selo">{ROTULOS["leitura"][m["leitura"]]}</span>'
-    return (f'<article class="cartao"><p class="meta">{meta}</p><h{nivel}><a href="{esc(href)}">{esc(i["titulo"])}</a></h{nivel}>{extra}'
+    return (f'<article class="cartao tema-{tema_de(i)}"><p class="meta">{meta}</p><h{nivel}><a href="{esc(href)}">{esc(i["titulo"])}</a></h{nivel}>{extra}'
             f'<p>{esc(i["resumo"])}</p>{selo}</article>')
 
 
@@ -379,7 +437,7 @@ def attrs_filtro(i):
 
 def pagina_lista(cfg, itens, estados, base=""):
     """cfg: titulo, intro, vazio, caminho, ativo, filtros[(campo, rótulo, valores_ordenados, rotulos)], agrupar(campo|None)."""
-    corpo = f'<div class="pagina"><header class="topo-pagina"><p class="rotulo">{esc(cfg["rotulo"])}</p><h1>{esc(cfg["titulo"])}</h1><p class="lead">{cfg["intro"]}</p></header>'
+    corpo = f'<div class="pagina"><header class="topo-pagina"><p class="rotulo">{esc(cfg["rotulo"])}</p><h1>{esc(cfg["titulo"])}</h1><p class="lead">{cfg["intro"]}</p>{cfg.get("extra", "")}</header>'
     if not itens:
         return corpo + f'<div class="vazio">{cfg["vazio"]}</div></div>'
     ctrl = '<div class="controles" data-controles><div class="campo"><label for="f-busca">Buscar nesta lista</label><input id="f-busca" type="search" autocomplete="off"></div>'
@@ -397,7 +455,7 @@ def pagina_lista(cfg, itens, estados, base=""):
         for i in grupos[g]:
             campos, texto = attrs_filtro(i)
             da = "".join(f' data-{k}="{esc(v)}"' for k, v in campos.items())
-            cards += cartao(i, estados, base, 3 if cfg.get("agrupar") else 2).replace('<article class="cartao"', f'<article class="cartao" data-item data-texto="{esc(texto)}"{da}', 1)
+            cards += cartao(i, estados, base, 3 if cfg.get("agrupar") else 2).replace("<article ", f'<article data-item data-texto="{esc(texto)}"{da} ', 1)
         cont += f'<section class="grupo" data-grupo>{"<h2>" + esc(g) + "</h2>" if g else ""}<div class="grade">{cards}</div></section>'
     vazio = '<p class="vazio" data-sem-resultado hidden>Nenhum resultado. Tente outros termos ou limpe os filtros.</p>'
     return corpo + ctrl + cont + vazio + "</div>"
@@ -443,7 +501,7 @@ def pagina_item(i, html_corpo, heads, estados, rel_html):
         if m.get("link"): extra_antes += f'<p><a href="{esc(m["link"])}" rel="noopener noreferrer">Repositório ou página do projeto (externo)</a></p>'
     elif t == "escrito":
         cab = f'<p class="rotulo">{ROTULOS["categoria"][m["categoria"]]}</p>'
-        extra_antes = f'<p class="meta"><time datetime="{m["data"]}">{fmt_data(m["data"])}</time>' + (f' · atualizado em {fmt_data(m["atualizado"])}' if m.get("atualizado") else "") + "</p>"
+        extra_antes = f'<p class="meta">{data_txt(m)}' + (f' · atualizado em {fmt_data(m["atualizado"])}' if m.get("atualizado") else "") + "</p>"
         if m.get("subtitulo"): extra_antes = f'<p class="subtitulo">{esc(m["subtitulo"])}</p>' + extra_antes
         if m["categoria"] == "noticia":
             extra_antes += (f'<aside class="fonte" aria-label="Notícia original"><h2>Notícia original</h2><p><a href="{esc(m["fonte_url"])}" rel="noopener noreferrer">{esc(m["fonte_titulo"])}</a>'
@@ -451,7 +509,8 @@ def pagina_item(i, html_corpo, heads, estados, rel_html):
         if m.get("imagem"): extra_antes += f'<figure><img src="../{esc(m["imagem"])}" alt="" loading="lazy"></figure>'
     elif t == "resenha":
         cab = f'<p class="rotulo">Resenha · {ROTULOS["tipo"][m["tipo"]]}</p>'
-        extra_antes = f'<p class="meta">{esc(m["autoria"])} · {esc(m["ano"])} · <time datetime="{m["data"]}">{fmt_data(m["data"])}</time>' + (f' · nota {esc(m["nota"])}/5' if m.get("nota") else "") + "</p>"
+        extra_antes = f'<p class="meta">{esc(m["autoria"])} · {esc(m["ano"])} · {data_txt(m)}' + (f' · nota {esc(m["nota"])}/5' if m.get("nota") else "") + "</p>"
+        if m.get("subtitulo"): extra_antes = f'<p class="subtitulo">{esc(m["subtitulo"])}</p>' + extra_antes
         if m.get("capa"): extra_antes += f'<figure class="capa"><img src="../{esc(m["capa"])}" alt="Capa ou cartaz de {esc(i["titulo"])}" loading="lazy"></figure>'
         if m.get("spoilers") == "sim": extra_antes += '<p class="aviso-spoiler" role="note"><strong>Aviso:</strong> este texto contém spoilers.</p>'
     else:
@@ -461,7 +520,7 @@ def pagina_item(i, html_corpo, heads, estados, rel_html):
         extra_antes = '<dl class="ficha">' + "".join(f"<div><dt>{a}</dt><dd>{esc(b)}</dd></div>" for a, b in fichas if b) + "</dl>"
         if m.get("capa"): extra_antes += f'<figure class="capa"><img src="../{esc(m["capa"])}" alt="Capa de {esc(i["titulo"])}" loading="lazy"></figure>'
         if m.get("resenha"): extra_antes += f'<p><a href="../resenhas/{esc(m["resenha"])}.html">Ler a resenha deste livro →</a></p>'
-    return (f'<article class="pagina leitura"><p class="migalha"><a href="../{voltar[0]}">← {voltar[1]}</a></p><header class="topo-pagina">{cab}<h1>{esc(i["titulo"])}</h1></header>'
+    return (f'<article class="pagina leitura tema-{tema_de(i)}"><p class="migalha"><a href="../{voltar[0]}">← {voltar[1]}</a></p><header class="topo-pagina">{cab}<h1>{esc(i["titulo"])}</h1></header>'
             f'{extra_antes}{toc}<div class="prosa">{html_corpo}</div>{rel_html}</article>')
 
 
@@ -559,7 +618,7 @@ def pagina_busca():
             '<noscript><p>A busca precisa de JavaScript. Use o menu para navegar pelas seções.</p></noscript></div>')
 
 
-def pagina_index(dados, itens, por_tipo, estados, frases):
+def pagina_index(dados, itens, por_tipo, estados, frases, pauta=None):
     P, A, E, R, L = (por_tipo[k] for k in ("projeto", "aula", "escrito", "resenha", "livro"))
     areas_com = len({t for i in itens for t in i["meta"].get("tags", [])} & {a["id"] for a in dados["areas"]})
     def contagem(n, um, varios, vazio="Em construção"): return plural(n, um, varios) if n else vazio
@@ -582,6 +641,9 @@ def pagina_index(dados, itens, por_tipo, estados, frases):
     for titulo, lista, destino in (("Escritos recentes", [i for i in E if i["meta"]["categoria"] != "noticia"], "escritos.html"),
                                    ("Notícias comentadas", [i for i in E if i["meta"]["categoria"] == "noticia"], "escritos.html"), ("Resenhas recentes", R, "resenhas.html")):
         if lista: corpo += f'<section class="bloco"><div class="bloco-cab"><h2>{titulo}</h2><a href="{destino}">Ver todos</a></div><div class="grade">' + "".join(cartao(i, estados) for i in lista[:3]) + "</div></section>"
+    if pauta and pauta["textos"]:
+        corpo += ('<section class="bloco"><div class="bloco-cab"><h2>Na fila de escrita</h2><a href="pauta.html">Ver a pauta completa</a></div><ul class="pauta">'
+                  + "".join(f'<li><strong>{esc(t["titulo"])}</strong> ' + "".join(f'<span class="selo">{FORMATOS[x]}</span> ' for x in t.get("formato", [])) + "</li>" for t in pauta["textos"][:5]) + "</ul></section>")
     if frases: corpo += '<section class="bloco frase" data-frase aria-labelledby="fr-t"><h2 id="fr-t">Frase do dia</h2><blockquote><p data-frase-texto></p><footer data-frase-fonte></footer></blockquote></section>'
     datas = [i["meta"].get(c) for i in itens for c in ("atualizado", "data") if i["meta"].get(c)]
     if datas: corpo += f'<p class="meta atualizado">Última atualização de conteúdo: {fmt_data(max(datas))}.</p>'
@@ -600,6 +662,7 @@ def construir(escrever=True):
     itens = carregar(e, set(estados))
     chaves = verificar_referencias(itens, e)
     frases = carregar_frases(e)
+    pauta = carregar_pauta(e)
     if e: return list(e), None
     for i in itens:
         i["html"], i["heads"] = markdown(i["corpo"], Ctx(i["rel"], "../", chaves, e))
@@ -610,7 +673,9 @@ def construir(escrever=True):
     def ordena(t):
         L = [i for i in itens if i["tipo"] == t]
         if t == "aula": return sorted(L, key=lambda i: (ORDEM_ANO.index(i["meta"].get("ano")) if i["meta"].get("ano") in ORDEM_ANO else 99, int(i["meta"].get("ordem", 999)), i["titulo"]))
-        if t in ("escrito", "resenha"): return sorted(L, key=lambda i: (i["meta"]["data"], i["titulo"]), reverse=True)
+        if t in ("escrito", "resenha"):
+            com = sorted([i for i in L if i["meta"].get("data")], key=lambda i: (i["meta"]["data"], i["titulo"]), reverse=True)
+            return com + sorted([i for i in L if not i["meta"].get("data")], key=lambda i: i["titulo"])
         return sorted(L, key=lambda i: i["titulo"])
     por_tipo = {t: ordena(t) for t in TIPOS}
     por_chave = {i["chave"]: i for i in itens}
@@ -636,6 +701,7 @@ def construir(escrever=True):
                       filtros=[("ano", "Ano", valores("aula", "ano"), {}), ("recurso", "Tipo de recurso", valores("aula", "recurso"), ROTULOS["recurso"]), ("estado", "Estado", valores("aula", "estado"), est_rot)]),
         "escritos": dict(rotulo="Escritos", titulo="Ensaios, notícias comentadas e relatos", tipo="escrito", ativo="escritos", agrupar=None,
                          intro="A produção textual autoral: ensaios, notícias comentadas, relatos de experiências, reflexões e outros textos.",
+                         extra=(f'<p><a href="pauta.html">Em pauta: {plural(len(pauta["textos"]), "tema", "temas")} a desenvolver →</a></p>' if pauta["textos"] else ""),
                          vazio="<p>Os textos que hoje estão nos blogs vão ser trazidos para cá, com datas, imagens e autoria preservadas. A migração está aguardando a exportação dos blogs.</p>",
                          filtros=[("categoria", "Categoria", valores("escrito", "categoria"), ROTULOS["categoria"])]),
         "resenhas": dict(rotulo="Resenhas", titulo="Livros, filmes e séries", tipo="resenha", ativo="resenhas", agrupar=None,
@@ -650,14 +716,17 @@ def construir(escrever=True):
     for nome, cfg in listas.items():
         cfg = dict(cfg, caminho=f"{nome}.html")
         S[f"{nome}.html"] = layout(cfg["rotulo"], re.sub(r"<[^>]+>", "", cfg["intro"]), pagina_lista(cfg, por_tipo[cfg["tipo"]], estados), "", f"{nome}.html", cfg["ativo"], dados_js=False)
-    S["index.html"] = layout(NOME, "Arquivo vivo de investigação, ensino e criação: projetos, aulas, ensaios, resenhas e leituras entre ciência, tecnologia, filosofia e arte.", pagina_index(dados, itens, por_tipo, estados, frases), "", "index.html", "inicio", dados_js=bool(frases))
+    S["index.html"] = layout(NOME, "Arquivo vivo de investigação, ensino e criação: projetos, aulas, ensaios, resenhas e leituras entre ciência, tecnologia, filosofia e arte.", pagina_index(dados, itens, por_tipo, estados, frases, pauta), "", "index.html", "inicio", dados_js=bool(frases))
+    if pauta["textos"] or pauta["cadernos"]:
+        S["pauta.html"] = layout("Em pauta", "Temas e ideias que ainda serão desenvolvidos: resenhas, ensaios, reflexões e roteiros.", pagina_pauta(pauta), "", "pauta.html", "escritos")
     S["mapa.html"] = layout("Mapa de interesses", "Áreas de interesse ligadas aos conteúdos reais do site.", pagina_mapa(dados, itens), "", "mapa.html", "mapa")
     S["estudos.html"] = layout("Estudos e fórum", "Central de estudos: aulas, ensaios, resenhas, biblioteca e fórum de discussões.", pagina_estudos(dados, por_tipo), "", "estudos.html", "estudos")
     S["busca.html"] = layout("Busca", "Buscar no site.", pagina_busca(), "", "busca.html", "", dados_js=True, indexar=False)
     S["404.html"] = layout("Página não encontrada", "Página não encontrada.", '<div class="pagina"><h1>Página não encontrada</h1><p class="lead">O endereço não existe ou mudou de lugar. Volte ao <a href="/index.html">início</a> ou use a <a href="/busca.html">busca</a>.</p></div>', "/", "404.html", indexar=False)
     S["favicon.svg"] = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#1f4d41"/><g fill="none" stroke="#f6f4ee"><circle cx="16" cy="16" r="8" stroke-width="2"/><ellipse cx="16" cy="16" rx="14" ry="5" transform="rotate(-25 16 16)"/></g><circle cx="27" cy="10" r="2" fill="#f6f4ee"/></svg>\n'
     indice = [{"u": i["url"], "t": i["titulo"], "k": {"aula": "Aula", "projeto": "Projeto", "escrito": ROTULOS["categoria"].get(i["meta"].get("categoria"), "Escrito"),
-               "resenha": "Resenha", "livro": "Biblioteca"}[i["tipo"]], "r": i["resumo"], "g": i["meta"].get("tags", []), "x": i["plain"][:2500]} for i in itens]
+               "resenha": "Resenha", "livro": "Biblioteca"}[i["tipo"]], "r": i["resumo"], "g": i["meta"].get("tags", []), "x": i["plain"][:2500]} for i in itens] + [
+        {"u": "pauta.html#" + pauta_id(t["titulo"]), "t": t["titulo"], "k": "Em pauta", "r": t.get("nota", "Tema ainda sem texto."), "g": [], "x": ""} for t in pauta["textos"]]
     S["indice.js"] = "/* GERADO por build.py. Não edite à mão. */\nwindow.NOOSFERA = " + json.dumps({"indice": indice, "frases": frases, "forum": dados.get("forum")}, ensure_ascii=False, separators=(",", ":")) + ";\n"
     urls = sorted(u for u in S if u.endswith(".html") and u not in ("404.html", "busca.html"))
     S["sitemap.xml"] = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

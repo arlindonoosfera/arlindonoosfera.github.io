@@ -154,3 +154,45 @@ main{max-width:var(--pagina);margin:0 auto;padding:0 1.25rem 3rem}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 .sumario .n3{margin-left:1.25rem;font-size:.92em;list-style:circle}
+
+/* ===== Temas por tipo de conteúdo (cada um muda cor, ornamento e, na leitura, o ritmo do texto) ===== */
+:root{--tema:var(--verde);--glifo:"◯"}
+.tema-cinema{--tema:#8a1c1c;--glifo:"▤"}
+.tema-serie{--tema:#2b4a8a;--glifo:"▭"}
+.tema-livro{--tema:#6b4a1f;--glifo:"❡"}
+.tema-musica{--tema:#5a2d82;--glifo:"♪"}
+.tema-jogo{--tema:#0b6060;--glifo:"◈"}
+.tema-arte{--tema:#a0432a;--glifo:"◐"}
+.tema-reflexao{--tema:#3b3f46;--glifo:"✦"}
+.tema-ensaio{--tema:var(--verde);--glifo:"§"}
+.tema-noticia{--tema:var(--ocre);--glifo:"◉"}
+.tema-relato{--tema:#2f6b3a;--glifo:"✎"}
+.tema-texto{--tema:var(--verde);--glifo:"¶"}
+.tema-ciencia{--tema:var(--verde);--glifo:"◯"}
+@media (prefers-color-scheme:dark){
+  .tema-cinema{--tema:#e58f8f}.tema-serie{--tema:#9db8f0}.tema-livro{--tema:#d2b36b}.tema-musica{--tema:#c9a6ee}
+  .tema-jogo{--tema:#7fd0d0}.tema-arte{--tema:#f0a68c}.tema-reflexao{--tema:#b8bcc4}.tema-relato{--tema:#8fd09b}
+}
+.cartao[class*="tema-"]{border-top:3px solid var(--tema)}
+.cartao[class*="tema-"] .meta::before{content:var(--glifo) / "";color:var(--tema);margin-right:.35em}
+.leitura[class*="tema-"] .rotulo{color:var(--tema)}
+.leitura[class*="tema-"] .prosa blockquote{border-left-color:var(--tema)}
+.leitura[class*="tema-"] a{color:var(--tema)}
+.leitura[class*="tema-"] .migalha a,.leitura[class*="tema-"] .relacionados a,.leitura[class*="tema-"] .sumario a{color:var(--verde)}
+.tema-cinema .topo-pagina{border-block:10px dotted var(--tema);padding:1rem 0}
+.tema-serie .topo-pagina{border-left:6px solid var(--tema);padding-left:1rem}
+.tema-livro .prosa>p:first-of-type::first-letter{font-size:3.2em;float:left;line-height:.85;padding:.1em .12em 0 0;color:var(--tema)}
+.tema-musica .topo-pagina{border-bottom:4px double var(--tema);padding-bottom:1rem}
+.tema-jogo .rotulo{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.tema-jogo .topo-pagina{border:1px dashed var(--tema);padding:.9rem 1rem}
+.tema-arte .topo-pagina{border-bottom:2px solid var(--tema);padding-bottom:1rem}
+.tema-arte .prosa img{padding:.5rem;background:var(--papel)}
+.tema-noticia .fonte{border-left:4px solid var(--tema)}
+.tema-relato .topo-pagina{border-left:3px dotted var(--tema);padding-left:1rem}
+.tema-reflexao .topo-pagina{text-align:center}
+.tema-reflexao .prosa{font-size:1.2rem;line-height:1.95;margin-inline:auto}
+.tema-reflexao .prosa::after{content:"✦" / "";display:block;text-align:center;color:var(--tema);margin-top:2.5rem;font-size:1.2rem}
+.pauta{list-style:none;padding:0;max-width:var(--medida)}
+.pauta li{padding:.7rem 0;border-bottom:1px solid var(--linha)}
+.pauta .meta{margin:.25rem 0 0}
+.pauta .selo{margin:0 .25rem 0 0}

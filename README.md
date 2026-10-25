@@ -30,8 +30,8 @@ Cabeçalho entre `---`, uma linha `chave: valor` por campo; listas separadas por
 | --- | --- | --- |
 | aula | `titulo` | `estado`, `ano`, `unidade`, `recurso` (aula, atividade, guia, avaliacao, material, roteiro, plano), `disciplina`, `nivel`, `duracao`, `tags`, `resumo`, `arquivo` (`caminho \| rótulo`), `relacionados`, `ordem`, `data`, `atualizado` |
 | projeto | `titulo`, `estado`, `area`, `resumo` | `tags`, `inicio`, `atualizado`, `destaque`, `link`, `relacionados` |
-| escrito | `titulo`, `categoria` (ensaio, noticia, reflexao, relato, texto), `data`, `resumo` | `subtitulo`, `tags`, `atualizado`, `imagem`, `relacionados`; **notícia comentada exige** `fonte_titulo`, `fonte_url`, `fonte_data` |
-| resenha | `titulo`, `tipo` (livro, filme, serie), `autoria`, `ano`, `data`, `resumo` | `spoilers`, `nota` (0 a 5), `capa`, `tags`, `relacionados`, `atualizado` |
+| escrito | `titulo`, `categoria` (ensaio, noticia, reflexao, relato, texto), `resumo` | `data` (original; se desconhecida, omita e a página mostra “data original a confirmar”), `tema`, `subtitulo`, `tags`, `atualizado`, `imagem`, `relacionados`; **notícia comentada exige** `fonte_titulo`, `fonte_url`, `fonte_data` |
+| resenha | `titulo`, `tipo` (livro, filme, serie, documentario, musica, jogo, arte), `autoria`, `ano`, `resumo` | `data`, `tema`, `subtitulo`, `spoilers`, `nota` (0 a 5), `capa`, `tags`, `relacionados`, `atualizado` |
 | livro (biblioteca) | `titulo`, `autor`, `leitura` (por-ler, a-ler, lendo, concluido, abandonado) | `edicao`, `editora`, `ano`, `isbn`, `inicio`, `fim`, `resenha` (slug), `tags`, `relacionados`, `resumo`, `capa`, `atualizado` |
 
 - `area` de projeto: `Categoria · Subárea` (a categoria vira filtro).
@@ -40,6 +40,14 @@ Cabeçalho entre `---`, uma linha `chave: valor` por campo; listas separadas por
 - Links internos no texto: `[texto](aulas/slug)`. Imagens: `![texto alternativo](img/pasta/arquivo.webp "legenda")`; o arquivo precisa existir.
 - Livros: use `## Citações` com `>` e a página e a edição (`— p. 12, 3ª ed.`). Nada de citação sem fonte.
 - Notícias: escreva só o seu comentário; o site mostra a fonte e o link antes dele.
+
+## Temas visuais
+
+Cada tipo de conteúdo tem um tema (cor de destaque, ornamento e ritmo de leitura): `cinema` (moldura perfurada), `serie`, `livro` (capitular), `musica`, `jogo`, `arte`, `reflexao` (texto centrado, mais arejado), `ensaio`, `noticia`, `relato`, `texto`, `ciencia` (aulas e projetos). O tema é derivado do tipo ou da categoria; para trocar, use `tema: nome` no cabeçalho de escritos e resenhas. Os temas respeitam o modo escuro e passam no contraste mínimo.
+
+## Pauta (temas ainda sem texto)
+
+`conteudo/pauta.json` lista o que ainda **não** foi escrito, para o site tratar como intenção e não como texto publicado. Formato (modelo em `conteudo/_modelos/pauta.exemplo.json`): `textos` (cada um com `titulo`, `formato` opcional como lista de resenha, reflexao, ensaio, biografia, guia, relato, outro, e `nota` opcional) e `cadernos` (`titulo`, `nota` opcional, `ideias` não vazia). Gera `pauta.html`, o bloco "Na fila de escrita" da página inicial e entradas na busca. Quando um tema for escrito, crie o arquivo em `conteudo/escritos/` ou `conteudo/resenhas/` e remova-o da pauta.
 
 ## Dia a dia
 
