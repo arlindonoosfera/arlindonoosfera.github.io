@@ -1,84 +1,92 @@
-# arlindonoosfera.github.io
+# Noosfera · arlindonoosfera.github.io
 
-Site pessoal de Arlindo Noosfera: portfólio, arquivo intelectual e laboratório. Estático (HTML, CSS e JavaScript puro), compatível com GitHub Pages, sem servidor e sem dependências externas.
+Arquivo vivo de investigação, ensino e criação de Arlindo Noosfera. Site **estático** (HTML, CSS e JavaScript puro), gerado por um script Python, compatível com GitHub Pages. Sem servidor, sem banco de dados, sem dependências além do Python 3.9+ (e Node 18+ só para testes).
 
 ## Estrutura
 
-| Arquivo | Função |
+| Caminho | Função |
 | --- | --- |
-| `dados.json` | **Fonte única** de estados, projetos, trajetória, interesses e conexões. Edite este arquivo. |
-| `data.js` | Gerado por `build.py` a partir de `dados.json` (define `window.DADOS`). Não edite à mão. |
-| `lib.js` | Funções puras: validação, URLs seguras, busca e filtros. |
-| `app.js` | Renderização e eventos (DOM seguro: nada de `innerHTML`). |
-| `conteudo/aulas/*.md` | Páginas de aula em Markdown. |
-| `build.py` | Valida tudo e gera `data.js`, `aulas.html`, `aulas/*.html`, `sitemap.xml`, `robots.txt`. |
-| `index.html`, `plano-biologia.html`, `style.css` | Páginas e estilo escritos à mão. |
+| `conteudo/aulas`, `projetos`, `escritos`, `resenhas`, `biblioteca` | **Fonte do conteúdo**: um `.md` por item, com cabeçalho `chave: valor`. |
+| `conteudo/frases.json` | Frases do dia (opcional; só aparecem com autoria e fonte). |
+| `conteudo/_modelos/` | Modelos para copiar. Ignorada pelo build. |
+| `dados.json` | Estados, áreas de interesse, relações entre áreas e configuração do fórum. |
+| `build.py` | Valida tudo e gera as páginas, `indice.js`, `sitemap.xml`, `robots.txt`, `404.html`. |
+| `style.css`, `site.js` | Estilo (claro/escuro automático) e comportamento (menu, filtros, busca, frase, fórum). |
+| `img/`, `downloads/` | Imagens otimizadas e arquivos para baixar. |
+| `tools/` | Importadores (Notion e Blogger). Não fazem parte do site. |
 | `tests/` | Testes automatizados. |
 
-## Estados válidos
+Os arquivos `.html`, `indice.js`, `sitemap.xml` e `robots.txt` na raiz são **gerados**: não edite à mão. Faça commit deles junto com o conteúdo.
 
-Definidos em `dados.json` → `estados` (identificador sem acento, rótulo, fase da Lua). A legenda, os filtros, os rótulos das aulas e a validação usam essa mesma lista.
+## Estados
 
-| id | rótulo | |
+Definidos em `dados.json` → `estados` (identificador sem acento, rótulo, fase da Lua): `ideia` 🌑, `planejamento` 🌒, `desenvolvimento` 🌓, `aplicado` 🌔, `concluido` 🌕, `arquivado` 🌘, `confirmar` ◌ (provisório: estado ainda a definir). Estado desconhecido é erro de build.
+
+## Tipos de conteúdo e campos
+
+Cabeçalho entre `---`, uma linha `chave: valor` por campo; listas separadas por vírgula; datas `AAAA-MM-DD`; `sim`/`nao` para booleanos. Campo desconhecido, ausente ou inválido interrompe o build com o arquivo e o campo.
+
+| Tipo | Obrigatórios | Opcionais |
 | --- | --- | --- |
-| `proposta` | Proposta | 🌑 |
-| `planejamento` | Em planejamento | 🌒 |
-| `desenvolvimento` | Em desenvolvimento | 🌓 |
-| `aplicado` | Aplicado | 🌔 |
-| `concluido` | Concluído | 🌕 |
-| `confirmar` | Estágio a confirmar | ◌ |
+| aula | `titulo` | `estado`, `ano`, `unidade`, `recurso` (aula, atividade, guia, avaliacao, material, roteiro, plano), `disciplina`, `nivel`, `duracao`, `tags`, `resumo`, `arquivo` (`caminho \| rótulo`), `relacionados`, `ordem`, `data`, `atualizado` |
+| projeto | `titulo`, `estado`, `area`, `resumo` | `tags`, `inicio`, `atualizado`, `destaque`, `link`, `relacionados` |
+| escrito | `titulo`, `categoria` (ensaio, noticia, reflexao, relato, texto), `data`, `resumo` | `subtitulo`, `tags`, `atualizado`, `imagem`, `relacionados`; **notícia comentada exige** `fonte_titulo`, `fonte_url`, `fonte_data` |
+| resenha | `titulo`, `tipo` (livro, filme, serie), `autoria`, `ano`, `data`, `resumo` | `spoilers`, `nota` (0 a 5), `capa`, `tags`, `relacionados`, `atualizado` |
+| livro (biblioteca) | `titulo`, `autor`, `leitura` (por-ler, a-ler, lendo, concluido, abandonado) | `edicao`, `editora`, `ano`, `isbn`, `inicio`, `fim`, `resenha` (slug), `tags`, `relacionados`, `resumo`, `capa`, `atualizado` |
 
-Estado desconhecido: o `build.py` recusa (erro com caminho e campo); se chegar ao navegador, o item vira `confirmar` e o problema é registrado no console.
+- `area` de projeto: `Categoria · Subárea` (a categoria vira filtro).
+- `tags`: identificadores de `dados.json` → `areas` alimentam o **mapa de interesses**. Outras tags valem para busca, mas não aparecem no mapa.
+- `relacionados`: `tipo/slug` (ex.: `aulas/botanica`). Páginas também mostram itens que compartilham tags.
+- Links internos no texto: `[texto](aulas/slug)`. Imagens: `![texto alternativo](img/pasta/arquivo.webp "legenda")`; o arquivo precisa existir.
+- Livros: use `## Citações` com `>` e a página e a edição (`— p. 12, 3ª ed.`). Nada de citação sem fonte.
+- Notícias: escreva só o seu comentário; o site mostra a fonte e o link antes dele.
 
-## Como adicionar conteúdo
-
-- **Projeto, trajetória, interesse ou link:** edite `dados.json` e rode `python3 build.py`. Campos de projeto: `titulo`, `area` ("Categoria · Subárea"; a categoria alimenta o filtro), `resumo`, `estagio` (obrigatórios); `metodo`, `nota`, `link` (opcionais; `link` deve ser http/https, ou omita o campo). Em `conexoes`, deixe `url` vazia enquanto o endereço não existir.
-- **Aula:** crie `conteudo/aulas/nome-da-aula.md` e rode `python3 build.py`. Cabeçalho opcional:
-
-```
----
-titulo: Extinções em massa
-ano: 1º ano · Unidade 2
-estagio: planejamento
-data: 2026-10-24
----
-# Extinções em massa
-Texto em Markdown...
-```
-
-Chaves aceitas: `titulo`, `ano`, `estagio`, `data` (AAAA-MM-DD). Qualquer outra chave, chave repetida ou linha fora do formato `chave: valor` é erro. Sem `titulo`, vale o primeiro `# Título`. Arquivos começando com `_` são ignorados. Exportações do Notion ("Markdown & CSV") servem; revise antes de publicar (códigos de turma, links privados, dados de estudantes).
-
-## Validar, construir e testar
+## Dia a dia
 
 ```
-python3 build.py --check   # só valida, não escreve
-python3 build.py           # valida e gera; se houver erro, não escreve nada
+python3 build.py --check   # só valida
+python3 build.py           # valida e gera (se houver erro, não escreve nada; nunca apaga arquivos)
 sh tests/run.sh            # validação + testes JS + testes Python
+python3 -m http.server 8000   # ver em http://localhost:8000
 ```
 
-O build nunca apaga arquivos: se renomear ou remover uma aula, apague à mão o `.html` antigo em `aulas/`. Requisitos: Python 3.9+ e Node 18+ (apenas para os testes). Sem pacotes externos.
+Remover ou renomear um item: apague à mão o `.html` antigo da pasta correspondente.
 
-## Ver localmente
+## Importar do Notion
 
-```
-python3 -m http.server 8000   # abra http://localhost:8000
-```
+Exporte a página (Markdown & CSV, com subpáginas) e rode `python3 tools/importar_notion.py Export.zip` (acrescente `--sobrescrever` para refazer). O script remove links privados (Sala de Aula, Character.ai, páginas do Notion não importadas) e códigos de turma, otimiza imagens (com Pillow, se instalado) e **omite imagens de terceiros ou de autoria incerta** (edite `IMAGENS_PROPRIAS` no script para liberar pastas suas). Revise o resultado antes de publicar: o plano de ensino contém anotações de rascunho.
+
+## Migrar o Blogger
+
+1. No Blogger: Configurações → Gerenciar blog → **Fazer backup do conteúdo** (um XML por blog).
+2. `python3 tools/importar_blogger.py backup.xml` cria rascunhos em `conteudo/_rascunhos_blogger/` (fora do site) e um `relatorio.txt`.
+3. Para cada texto: escolha categoria/tipo, complete os campos, baixe as imagens para `img/` e ajuste os links, e mova para `conteudo/<tipo>/`.
+4. Só depois de validado, apague o conteúdo original no Blogger, se quiser. O build não redireciona endereços do Blogger (não estão sob seu controle); mantenha o blog ativo ou publique links do novo endereço.
+
+## Frase do dia
+
+Crie `conteudo/frases.json` (modelo em `conteudo/_modelos/frases.exemplo.json`). Cada frase exige `texto`, `autor` e `fonte` verificável. Sem arquivo ou sem frases, o bloco não aparece. A frase é a mesma o dia inteiro para qualquer visitante.
+
+## Fórum
+
+Um site estático não guarda comentários. A arquitetura escolhida é o **giscus** (comentários no GitHub Discussions): autenticação pelo GitHub, anti-spam e moderação pelo próprio GitHub, sem servidor nem chave secreta. Para ativar:
+
+1. No repositório, habilite **Discussions** e crie uma categoria (tipo "Announcement" ou "Q&A").
+2. Instale o app **giscus** no repositório e gere os valores em https://giscus.app (os identificadores são públicos por projeto, não são segredos).
+3. Preencha `dados.json` → `forum` com `repo`, `repo_id`, `categoria`, `categoria_id` e rode `python3 build.py`.
+
+Enquanto `forum` for `null`, a página mostra apenas um aviso de que o fórum não foi aberto. Com o fórum ativo, o script do giscus **só é carregado quando a pessoa clica** em "Carregar discussão", e a página informa que isso conecta a um serviço externo.
 
 ## Publicar no GitHub Pages
 
-1. Rode `sh tests/run.sh` e confirme que passa.
-2. Faça commit de **todos** os arquivos, inclusive os gerados (`data.js`, `aulas.html`, `aulas/`, `sitemap.xml`, `robots.txt`).
-3. `git push` na branch publicada; em *Settings → Pages*, confirme a fonte (branch `main`, pasta `/root`).
+1. `sh tests/run.sh` passando.
+2. Commit de **tudo**, inclusive os arquivos gerados (`*.html`, `aulas/`, `projetos/`, `indice.js`, `sitemap.xml`, `robots.txt`).
+3. Push na branch publicada; em Settings → Pages confirme a fonte (branch, pasta raiz). Os caminhos das páginas são relativos; só `404.html` e as URLs canônicas assumem o domínio `https://arlindonoosfera.github.io/` (constante `SITE_URL` em `build.py`).
 
-Todos os caminhos são relativos, então o site funciona na raiz do domínio e em subcaminhos. `SITE_URL` em `build.py` define as URLs canônicas e o sitemap; altere se o domínio mudar.
+## Acessibilidade e privacidade
 
-## Regras
+HTML semântico, link para pular ao conteúdo, foco visível, contraste ≥ 4,5:1 nos dois modos (verificado no CSS), `prefers-reduced-motion`, imagens com texto alternativo, mapa com alternativa em texto. Sem cookies, sem analytics, sem fontes externas. O único serviço de terceiros possível é o giscus, e só após clique.
 
-Nada de dados, links, créditos ou resultados inventados; o estágio deve refletir o estado real. Não publicar códigos de turma, dados de estudantes nem links privados. Os testes barram o código de turma e links de chat já removidos.
+## Regras do projeto
 
-## Decisões de arquitetura
-
-- **Uma fonte de dados (`dados.json`) gerando `data.js`:** elimina o desencontro entre legenda, rótulos e filtros, e permite validar antes de publicar. `window.DADOS` continua existindo.
-- **Sem framework nem bibliotecas:** o site tem poucas páginas e pouca interação.
-- **Markdown próprio e mínimo:** tudo é escapado e só links http/https viram `<a>`, para evitar XSS. Se o conteúdo crescer muito, troque por uma biblioteca revisada e documente.
-- **Sem `localStorage`:** os filtros são rápidos de refazer; persistir não compensa.
+Nada de dados, links, créditos, imagens ou resultados inventados; o estado de cada item reflete o real. Não publicar códigos de turma, dados de estudantes nem links privados (os testes barram os já removidos). Imagens ilustrativas são identificadas como tais.

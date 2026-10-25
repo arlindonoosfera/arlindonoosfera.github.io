@@ -1,107 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arlindo Noosfera · arquivo de investigação e criação</title>
-<meta name="description" content="Estudante de Licenciatura em Ciências Biológicas. Projetos, ensaios, leituras e aulas em Biologia, educação, tecnologia e arte.">
-<link rel="canonical" href="https://arlindonoosfera.github.io/">
-<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Arlindo Noosfera · arquivo de investigação e criação">
-<meta property="og:description" content="Projetos, ensaios, leituras e aulas em Biologia, educação, tecnologia e arte.">
-<meta property="og:url" content="https://arlindonoosfera.github.io/">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<a class="pular" href="#conteudo">Pular para o conteúdo</a>
-<header class="topo">
-  <a class="marca" href="index.html"><span aria-hidden="true">🌒</span> Arlindo Noosfera</a>
-  <nav aria-label="Principal">
-    <a href="#projetos">Projetos</a>
-    <a href="#aulas">Aulas</a>
-    <a href="#escritos">Escritos</a>
-    <a href="#mapa">Mapa</a>
-    <a href="#trajetoria">Trajetória</a>
-    <a href="#conexoes">Conexões</a>
-  </nav>
-</header>
-
-<main id="conteudo">
-  <section class="abertura">
-    <p class="rotulo">Noosfera: a esfera do pensamento</p>
-    <h1>Um arquivo vivo de perguntas, projetos e leituras.</h1>
-    <p class="lead">Sou estudante de Licenciatura em Ciências Biológicas. Este site reúne o que investigo, construo e escrevo entre Biologia, educação, tecnologia e arte, indicando em que etapa cada trabalho realmente está.</p>
-    <p class="luas" id="legenda" aria-label="Legenda dos estágios, como fases da Lua"></p>
-    <p class="epigrafe"><em>Hic sunt dracones</em>: onde o mapa acaba, a investigação começa.</p>
-    <p class="fluxo" aria-label="Percurso">Formação → conhecimentos → projetos → aplicação → evidências → análise → divulgação</p>
-  </section>
-
-  <section id="projetos" aria-labelledby="h-proj">
-    <h2 id="h-proj">Projetos</h2>
-    <p class="intro">Ideia, planejamento e realização são coisas diferentes. Cada projeto traz o seu estágio.</p>
-    <p id="erro-dados" class="erro" role="alert" hidden></p>
-    <div class="controles">
-      <div class="campo"><label for="busca">Buscar nos projetos</label><input id="busca" type="search" autocomplete="off"></div>
-      <div class="campo"><label for="categoria">Área</label><select id="categoria"><option value="">Todas</option></select></div>
-      <button id="limpar" type="button" class="limpar" hidden>Limpar filtros</button>
-    </div>
-    <div id="filtros" class="filtros" role="group" aria-label="Filtrar por estágio"></div>
-    <p id="status" class="status" role="status"></p>
-    <div id="lista-projetos" class="projetos"></div>
-  </section>
-
-  <section id="aulas" aria-labelledby="h-aulas">
-    <h2 id="h-aulas">Aulas e educação</h2>
-    <p class="intro">Material didático planejado, produzido e aplicado são etapas diferentes; cada item indica a sua.</p>
-    <article class="projeto">
-      <p class="etapa">Material planejado · rascunho</p>
-      <h3><a href="plano-biologia.html">Plano de Ensino de Biologia: Ensino Médio (STEM)</a></h3>
-      <p class="area">Ensino de Biologia · 1º, 2º e 3º anos</p>
-      <p>Plano completo para os três anos do Ensino Médio, com filosofia pedagógica, metodologias ativas, recursos, unidades de cada ano e sistema de avaliação.</p>
-      <p class="nota">Aplicação em sala não registrada.</p>
-    </article>
-    <p><a href="aulas.html">Ver todas as páginas de aula →</a></p>
-  </section>
-
-  <section id="escritos" aria-labelledby="h-esc">
-    <h2 id="h-esc">Escritos e leituras</h2>
-    <div class="duas">
-      <article class="vazio">
-        <h3>Ensaios</h3>
-        <p>Aqui entrarão os ensaios selecionados do Blogger, com data original, resumo e link para a publicação. Ainda aguardando a exportação do blog.</p>
-      </article>
-      <article class="vazio">
-        <h3>Biblioteca</h3>
-        <p>Cada livro terá ficha, situação da leitura, notas, passagens marcadas e perguntas. Nenhum livro foi catalogado ainda.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="mapa" aria-labelledby="h-mapa">
-    <h2 id="h-mapa">Mapa de interesses</h2>
-    <p class="intro">Portas de entrada, não credenciais. Cada tema leva a conteúdos à medida que eles existem.</p>
-    <div id="lista-mapa" class="mapa"></div>
-  </section>
-
-  <section id="trajetoria" aria-labelledby="h-traj">
-    <h2 id="h-traj">Trajetória</h2>
-    <div id="lista-traj" class="traj"></div>
-  </section>
-
-  <section id="conexoes" aria-labelledby="h-con">
-    <h2 id="h-con">Conexões</h2>
-    <p class="intro">Cada plataforma cumpre seu papel; este site é o ponto de encontro entre elas.</p>
-    <ul id="lista-con" class="conexoes"></ul>
-  </section>
-</main>
-
-<footer class="rodape">
-  <p>© Arlindo Noosfera. Textos e imagens próprios, salvo indicação. Conteúdo em construção.</p>
-</footer>
-
-<noscript><p class="aviso">Ative o JavaScript para ver a lista de projetos e o mapa de interesses.</p></noscript>
-<script src="data.js"></script>
-<script src="lib.js"></script>
-<script src="app.js"></script>
-</body>
-</html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arlindo Noosfera</title><meta name="description" content="Arquivo vivo de investigação, ensino e criação: projetos, aulas, ensaios, resenhas e leituras entre ciência, tecnologia, filosofia e arte.">
+<link rel="canonical" href="https://arlindonoosfera.github.io/"><meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Arlindo Noosfera"><meta property="og:title" content="Arlindo Noosfera"><meta property="og:description" content="Arquivo vivo de investigação, ensino e criação: projetos, aulas, ensaios, resenhas e leituras entre ciência, tecnologia, filosofia e arte."><meta property="og:url" content="https://arlindonoosfera.github.io/">
+<meta name="color-scheme" content="light dark"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add("js")</script></head>
+<body><a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="cabecalho"><div class="cabecalho-in">
+<a class="marca" href="index.html"><svg class="logo" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="16" cy="16" rx="14" ry="5" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(-25 16 16)"/><circle cx="27" cy="10" r="2" fill="currentColor"/></svg><span>Arlindo Noosfera</span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<nav id="menu" aria-label="Principal"><ul><li><a href="index.html" aria-current="page">Início</a></li><li><a href="projetos.html">Projetos</a></li><li><a href="aulas.html">Aulas e educação</a></li><li><a href="escritos.html">Escritos</a></li><li><a href="resenhas.html">Resenhas</a></li><li><a href="biblioteca.html">Biblioteca</a></li><li><a href="mapa.html">Mapa de interesses</a></li><li><a href="estudos.html">Estudos e fórum</a></li></ul>
+<form class="busca" role="search" action="busca.html" method="get"><label class="sr" for="q">Buscar no site</label><input id="q" name="q" type="search" placeholder="Buscar" autocomplete="off"><button type="submit">Buscar</button></form></nav>
+</div></header>
+<main id="conteudo"><section class="heroi"><p class="rotulo">Noosfera · arquivo vivo de investigação e criação</p><h1>Perguntar. Investigar. Construir. Partilhar.</h1><p class="lead">Um espaço para registrar o que estudo, ensino e crio entre ciência, tecnologia, filosofia e arte, mostrando em que etapa está cada trabalho.</p><p class="acoes"><a class="botao" href="estudos.html">Quero estudar</a> <a class="botao secundario" href="projetos.html">Ver projetos</a></p></section><section class="bloco"><h2 class="sr">Seções do site</h2><ul class="atalhos-grade"><li><a class="atalho" href="estudos.html"><strong>Estudar</strong><span>Central de estudos e fórum</span></a></li><li><a class="atalho" href="projetos.html"><strong>Projetos</strong><span>11 projetos</span></a></li><li><a class="atalho" href="aulas.html"><strong>Aulas e educação</strong><span>31 páginas</span></a></li><li><a class="atalho" href="escritos.html"><strong>Escritos</strong><span>Em migração</span></a></li><li><a class="atalho" href="resenhas.html"><strong>Resenhas</strong><span>Em construção</span></a></li><li><a class="atalho" href="biblioteca.html"><strong>Biblioteca</strong><span>Em construção</span></a></li><li><a class="atalho" href="mapa.html"><strong>Mapa de interesses</strong><span>17 áreas com conteúdo</span></a></li></ul></section><section class="bloco"><div class="bloco-cab"><h2>Projetos em destaque</h2><a href="projetos.html">Todos os projetos</a></div><div class="grade"><article class="cartao"><p class="meta">Ciências naturais · Caatinga</p><h3><a href="projetos/aetherion.html">Aetherion</a></h3><p>Pesquisa sobre a temperatura da superfície do solo durante calor extremo e seu efeito na germinação e viabilidade de sementes da Caatinga.</p><span class="selo estado-planejamento"><span aria-hidden="true">🌒</span> Em planejamento</span></article></div></section><section class="bloco"><div class="bloco-cab"><h2>Aulas e educação</h2><a href="aulas.html">Todos os materiais</a></div><div class="grade"><article class="cartao"><p class="meta">Visão geral · Plano de ensino</p><h3><a href="aulas/plano-de-ensino-de-biologia-rascunho-ensino-medio-stem.html">Plano de Ensino de Biologia (rascunho) - Ensino Médio (STEM)</a></h3><p>AVALIAÇÃO GERAL</p><span class="selo estado-planejamento"><span aria-hidden="true">🌒</span> Em planejamento</span></article><article class="cartao"><p class="meta">Do 1º ao 3º ano</p><h3><a href="aulas.html">Materiais por ano e unidade</a></h3><p>31 páginas entre aulas, atividades, guias e avaliações de Biologia.</p></article></div></section></main>
+<footer class="rodape"><p>© Arlindo Noosfera. Textos e materiais autorais, salvo indicação. Imagens ilustrativas são identificadas como tais.</p>
+<p><a href="https://github.com/arlindonoosfera/arlindonoosfera.github.io" rel="noopener noreferrer">Código-fonte do site</a></p></footer>
+<script src="site.js" defer></script></body></html>

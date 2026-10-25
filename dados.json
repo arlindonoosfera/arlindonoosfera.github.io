@@ -1,8 +1,8 @@
 {
   "estados": [
     {
-      "id": "proposta",
-      "rotulo": "Proposta",
+      "id": "ideia",
+      "rotulo": "Ideia",
       "lua": "🌑"
     },
     {
@@ -26,204 +26,444 @@
       "lua": "🌕"
     },
     {
+      "id": "arquivado",
+      "rotulo": "Arquivado",
+      "lua": "🌘"
+    },
+    {
       "id": "confirmar",
-      "rotulo": "Estágio a confirmar",
+      "rotulo": "Estado a confirmar",
       "lua": "◌"
     }
   ],
-  "projetos": [
+  "grupos": [
     {
-      "titulo": "Aetherion",
-      "estagio": "planejamento",
-      "area": "Ciências naturais · Caatinga",
-      "resumo": "Pesquisa sobre a temperatura da superfície do solo durante calor extremo e seu efeito na germinação e viabilidade de sementes da Caatinga.",
-      "metodo": "Temperaturas observadas definem tratamentos experimentais, comparados a um controle; depois, análise da germinação. Base de hardware planejada: réplica do projeto de Tinkercad \"DIY Weather Station With ESP32\".",
-      "nota": "Ainda sem medições nem resultados publicados. Resultados significativos exigem dados ambientais do solo e dados biológicos de germinação."
+      "id": "nat",
+      "nome": "Ciências naturais e espaço"
     },
     {
-      "titulo": "Simulador Hematológico",
-      "estagio": "confirmar",
-      "area": "Educação · Computação",
-      "resumo": "Simulador interativo para o ensino de morfologia e patologias sanguíneas.",
-      "link": "https://github.com/Alrodbs/simulador-hematologico",
-      "nota": "Objetivo pedagógico. Sem validação clínica."
+      "id": "edu",
+      "nome": "Educação e tecnologia"
     },
     {
-      "titulo": "Biologia em Mundos Imaginários",
-      "estagio": "planejamento",
-      "area": "Educação",
-      "resumo": "RPG educacional sobre biomas, adaptação e evolução.",
-      "nota": "Aplicação com estudantes, avaliação e relato de experiência são etapas futuras."
+      "id": "hum",
+      "nome": "Humanidades e sociedade"
     },
     {
-      "titulo": "Sobrevivência em Área Florestal e em Alto Mar",
-      "estagio": "desenvolvimento",
-      "area": "Educação · Interdisciplinar",
-      "resumo": "Livro/material didático interdisciplinar de criação coletiva: ambientes, orientação, meteorologia, botânica, primeiros socorros, energia e comunicação."
+      "id": "lit",
+      "nome": "Literatura e artes"
     },
     {
-      "titulo": "Severina: Vozes do Sertão",
-      "estagio": "confirmar",
-      "area": "Arte · Audiovisual",
-      "resumo": "Produção audiovisual sobre poesia nordestina, Caatinga, seca e identidade cultural, com estética do Cinema Novo.",
-      "nota": "Participação: direção e edição."
-    },
-    {
-      "titulo": "Recursos Hídricos, Saúde e Meio Ambiente",
-      "estagio": "confirmar",
-      "area": "Atividade técnico-científica",
-      "resumo": "Atividade técnico-científica em que atuei como monitor, apoiando as atividades e a organização da exposição final."
-    },
-    {
-      "titulo": "Astro: observação e astrofotografia",
-      "estagio": "confirmar",
-      "area": "Astronomia",
-      "resumo": "Observação astronômica e astrofotografia. Espaço reservado para registros reais: data, condições, equipamento, processamento e objetos."
-    },
-    {
-      "titulo": "Festa do Chá Newtoniana",
-      "estagio": "proposta",
-      "area": "Divulgação científica",
-      "resumo": "Proposta de divulgação interdisciplinar ligando Física, Química, Biologia, cinema, cotidiano e História das Ciências."
-    },
-    {
-      "titulo": "NEXUS",
-      "estagio": "proposta",
-      "area": "Educação",
-      "resumo": "Núcleo de Experiências e Desenvolvimento do Estudante: proposta de acompanhamento e avaliação integral, com cuidado com dados pessoais.",
-      "nota": "Não é um sistema implementado."
-    },
-    {
-      "titulo": "Astronomia multissensorial e inclusiva",
-      "estagio": "proposta",
-      "area": "Educação · Astronomia",
-      "resumo": "Experiências de Astronomia acessíveis por diferentes modalidades sensoriais."
-    },
-    {
-      "titulo": "Incubadora Botânica Automatizada",
-      "estagio": "proposta",
-      "area": "Computação · Botânica",
-      "resumo": "Ideia de sistema automatizado para cultivo e observação vegetal. Sem protótipo até o momento."
+      "id": "cin",
+      "nome": "Cinema, jogos e estratégia"
     }
   ],
-  "trajetoria": [
+  "areas": [
     {
-      "titulo": "Concluído",
-      "itens": [
-        "Ensino Médio (2025)",
-        "Técnico em Logística (2025)"
-      ]
+      "id": "neurobiologia",
+      "nome": "Neurobiologia",
+      "grupo": "nat"
     },
     {
-      "titulo": "Em andamento",
-      "itens": [
-        "Licenciatura em Ciências Biológicas",
-        "Técnico em Informática"
-      ]
+      "id": "biologia-marinha",
+      "nome": "Biologia Marinha",
+      "grupo": "nat"
     },
     {
-      "titulo": "Cursos e atividades complementares",
-      "itens": []
+      "id": "botanica",
+      "nome": "Botânica",
+      "grupo": "nat"
     },
     {
-      "titulo": "Possibilidades futuras (não são compromissos)",
-      "itens": [
-        "Astronomia e Astronáutica",
-        "Especialização em Ensino de Astronomia",
-        "Mestrado em área compatível (Biologia, Astrobiologia, Astronomia, Educação)",
-        "Artes Visuais, Filosofia, Pedagogia"
-      ]
+      "id": "oceanografia",
+      "nome": "Oceanografia",
+      "grupo": "nat"
+    },
+    {
+      "id": "ecologia",
+      "nome": "Ecologia",
+      "grupo": "nat"
+    },
+    {
+      "id": "evolucao",
+      "nome": "Evolução",
+      "grupo": "nat"
+    },
+    {
+      "id": "biodiversidade",
+      "nome": "Biodiversidade",
+      "grupo": "nat"
+    },
+    {
+      "id": "biologia-celular",
+      "nome": "Biologia Celular",
+      "grupo": "nat"
+    },
+    {
+      "id": "origem-da-vida",
+      "nome": "Origem da Vida",
+      "grupo": "nat"
+    },
+    {
+      "id": "astrobiologia",
+      "nome": "Astrobiologia",
+      "grupo": "nat"
+    },
+    {
+      "id": "astronomia",
+      "nome": "Astronomia",
+      "grupo": "nat"
+    },
+    {
+      "id": "cosmologia",
+      "nome": "Cosmologia",
+      "grupo": "nat"
+    },
+    {
+      "id": "meteorologia",
+      "nome": "Meteorologia",
+      "grupo": "nat"
+    },
+    {
+      "id": "meteorologia-espacial",
+      "nome": "Meteorologia Espacial",
+      "grupo": "nat"
+    },
+    {
+      "id": "climatologia",
+      "nome": "Climatologia",
+      "grupo": "nat"
+    },
+    {
+      "id": "geociencias",
+      "nome": "Geologia e Geociências",
+      "grupo": "nat"
+    },
+    {
+      "id": "caatinga",
+      "nome": "Caatinga e Sertão",
+      "grupo": "nat"
+    },
+    {
+      "id": "educacao-em-ciencias",
+      "nome": "Educação em Ciências",
+      "grupo": "edu"
+    },
+    {
+      "id": "educacao-ambiental",
+      "nome": "Educação Ambiental",
+      "grupo": "edu"
+    },
+    {
+      "id": "tecnologia-educacional",
+      "nome": "Tecnologia aplicada ao ensino",
+      "grupo": "edu"
+    },
+    {
+      "id": "inteligencia-artificial",
+      "nome": "Inteligência Artificial",
+      "grupo": "edu"
+    },
+    {
+      "id": "robotica",
+      "nome": "Robótica",
+      "grupo": "edu"
+    },
+    {
+      "id": "programacao",
+      "nome": "Programação",
+      "grupo": "edu"
+    },
+    {
+      "id": "linux",
+      "nome": "Linux e Arch Linux",
+      "grupo": "edu"
+    },
+    {
+      "id": "analise-de-dados",
+      "nome": "Análise de dados",
+      "grupo": "edu"
+    },
+    {
+      "id": "instrumentacao-cientifica",
+      "nome": "Instrumentação científica",
+      "grupo": "edu"
+    },
+    {
+      "id": "macroeconomia",
+      "nome": "Macroeconomia",
+      "grupo": "hum"
+    },
+    {
+      "id": "geografia-humana",
+      "nome": "Geografia Humana",
+      "grupo": "hum"
+    },
+    {
+      "id": "linguistica",
+      "nome": "Linguística",
+      "grupo": "hum"
+    },
+    {
+      "id": "etimologia",
+      "nome": "Etimologia",
+      "grupo": "hum"
+    },
+    {
+      "id": "filosofia-da-ciencia",
+      "nome": "Filosofia da Ciência",
+      "grupo": "hum"
+    },
+    {
+      "id": "existencialismo",
+      "nome": "Existencialismo",
+      "grupo": "hum"
+    },
+    {
+      "id": "fenomenologia",
+      "nome": "Fenomenologia",
+      "grupo": "hum"
+    },
+    {
+      "id": "ontologia",
+      "nome": "Ontologia",
+      "grupo": "hum"
+    },
+    {
+      "id": "niilismo",
+      "nome": "Niilismo",
+      "grupo": "hum"
+    },
+    {
+      "id": "semiotica",
+      "nome": "Semiótica",
+      "grupo": "hum"
+    },
+    {
+      "id": "antropologia-da-religiao",
+      "nome": "Antropologia da Religião",
+      "grupo": "hum"
+    },
+    {
+      "id": "historiografia",
+      "nome": "Historiografia",
+      "grupo": "hum"
+    },
+    {
+      "id": "folclore",
+      "nome": "Folclore",
+      "grupo": "hum"
+    },
+    {
+      "id": "literatura-experimental",
+      "nome": "Literatura experimental",
+      "grupo": "lit"
+    },
+    {
+      "id": "ficcao-cientifica",
+      "nome": "Ficção científica",
+      "grupo": "lit"
+    },
+    {
+      "id": "poesia-simbolista",
+      "nome": "Poesia simbolista",
+      "grupo": "lit"
+    },
+    {
+      "id": "epistolografia",
+      "nome": "Epistolografia",
+      "grupo": "lit"
+    },
+    {
+      "id": "musica",
+      "nome": "Música",
+      "grupo": "lit"
+    },
+    {
+      "id": "artes-visuais",
+      "nome": "Artes Visuais",
+      "grupo": "lit"
+    },
+    {
+      "id": "fotografia",
+      "nome": "Fotografia",
+      "grupo": "lit"
+    },
+    {
+      "id": "astrofotografia",
+      "nome": "Astrofotografia",
+      "grupo": "lit"
+    },
+    {
+      "id": "cinema",
+      "nome": "Cinema",
+      "grupo": "cin"
+    },
+    {
+      "id": "jogos-narrativos",
+      "nome": "Jogos narrativos e filosóficos",
+      "grupo": "cin"
+    },
+    {
+      "id": "construcao-de-mundos",
+      "nome": "Construção de mundos",
+      "grupo": "cin"
+    },
+    {
+      "id": "xadrez",
+      "nome": "Xadrez e jogos de estratégia",
+      "grupo": "cin"
     }
   ],
-  "interesses": [
-    {
-      "grupo": "Natureza e universo",
-      "itens": [
-        "Botânica",
-        "Ecologia",
-        "Evolução",
-        "Origem da Vida",
-        "Astrobiologia",
-        "Astronomia",
-        "Cosmologia",
-        "Climatologia",
-        "Geociências",
-        "Caatinga e Sertão"
-      ]
-    },
-    {
-      "grupo": "Educação e computação",
-      "itens": [
-        "Ensino de Ciências",
-        "Ensino de Astronomia",
-        "Python e Jupyter",
-        "ESP32 e Arduino",
-        "Linux, Git e GitHub",
-        "Análise de dados",
-        "Simulações"
-      ]
-    },
-    {
-      "grupo": "Pensamento e linguagem",
-      "itens": [
-        "Filosofia da Ciência",
-        "Existencialismo",
-        "Fenomenologia",
-        "Linguística e Etimologia",
-        "Antropologia da Religião",
-        "Historiografia e Folclore"
-      ]
-    },
-    {
-      "grupo": "Escrita e arte",
-      "itens": [
-        "Ficção científica",
-        "Poesia simbolista",
-        "Ensaios e epistolografia",
-        "Fotografia e astrofotografia",
-        "Cinema de autor",
-        "Música"
-      ]
-    },
-    {
-      "grupo": "Jogos e estratégia",
-      "itens": [
-        "Jogos narrativos e filosóficos",
-        "Construção de mundos",
-        "Xadrez"
-      ]
-    }
+  "relacoes": [
+    [
+      "biologia-marinha",
+      "oceanografia"
+    ],
+    [
+      "oceanografia",
+      "ecologia"
+    ],
+    [
+      "ecologia",
+      "educacao-ambiental"
+    ],
+    [
+      "ecologia",
+      "biodiversidade"
+    ],
+    [
+      "ecologia",
+      "caatinga"
+    ],
+    [
+      "botanica",
+      "caatinga"
+    ],
+    [
+      "botanica",
+      "ecologia"
+    ],
+    [
+      "evolucao",
+      "biodiversidade"
+    ],
+    [
+      "evolucao",
+      "origem-da-vida"
+    ],
+    [
+      "evolucao",
+      "biologia-celular"
+    ],
+    [
+      "origem-da-vida",
+      "astrobiologia"
+    ],
+    [
+      "astrobiologia",
+      "astronomia"
+    ],
+    [
+      "astronomia",
+      "cosmologia"
+    ],
+    [
+      "astronomia",
+      "astrofotografia"
+    ],
+    [
+      "astrofotografia",
+      "fotografia"
+    ],
+    [
+      "meteorologia",
+      "climatologia"
+    ],
+    [
+      "meteorologia",
+      "meteorologia-espacial"
+    ],
+    [
+      "meteorologia",
+      "instrumentacao-cientifica"
+    ],
+    [
+      "climatologia",
+      "caatinga"
+    ],
+    [
+      "instrumentacao-cientifica",
+      "programacao"
+    ],
+    [
+      "analise-de-dados",
+      "programacao"
+    ],
+    [
+      "analise-de-dados",
+      "instrumentacao-cientifica"
+    ],
+    [
+      "robotica",
+      "programacao"
+    ],
+    [
+      "educacao-em-ciencias",
+      "tecnologia-educacional"
+    ],
+    [
+      "educacao-em-ciencias",
+      "educacao-ambiental"
+    ],
+    [
+      "educacao-em-ciencias",
+      "filosofia-da-ciencia"
+    ],
+    [
+      "neurobiologia",
+      "biologia-celular"
+    ],
+    [
+      "ficcao-cientifica",
+      "cinema"
+    ],
+    [
+      "cinema",
+      "semiotica"
+    ],
+    [
+      "existencialismo",
+      "fenomenologia"
+    ],
+    [
+      "fenomenologia",
+      "ontologia"
+    ],
+    [
+      "ontologia",
+      "niilismo"
+    ],
+    [
+      "linguistica",
+      "etimologia"
+    ],
+    [
+      "linguistica",
+      "semiotica"
+    ],
+    [
+      "construcao-de-mundos",
+      "jogos-narrativos"
+    ],
+    [
+      "construcao-de-mundos",
+      "ficcao-cientifica"
+    ],
+    [
+      "programacao",
+      "linux"
+    ]
   ],
-  "conexoes": [
-    {
-      "nome": "GitHub",
-      "url": "https://github.com/arlindonoosfera",
-      "nota": "Código e documentação técnica"
-    },
-    {
-      "nome": "Repositório deste site",
-      "url": "https://github.com/arlindonoosfera/arlindonoosfera.github.io",
-      "nota": "Código-fonte do portfólio"
-    },
-    {
-      "nome": "Blogger",
-      "url": "",
-      "nota": "Ensaios: falta o endereço público do blog"
-    },
-    {
-      "nome": "Lattes",
-      "url": "",
-      "nota": "Link a informar"
-    },
-    {
-      "nome": "LinkedIn",
-      "url": "",
-      "nota": "Link a informar"
-    },
-    {
-      "nome": "Sala de aula",
-      "url": "",
-      "nota": "Link a informar"
-    }
-  ]
+  "forum": null
 }
