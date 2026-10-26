@@ -3,7 +3,6 @@
 set -e
 cd "$(dirname "$0")/.."
 python3 build.py --check
-node --check lib.js && node --check app.js
-node tests/lib.test.js
-node tests/app.smoke.js
+node --check site.js
+node tests/site.test.js
 python3 -m unittest discover -s tests
